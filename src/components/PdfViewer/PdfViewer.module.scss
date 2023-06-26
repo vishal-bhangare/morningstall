@@ -1,0 +1,38 @@
+.pdfBox {
+  position: relative;
+  width: 100%;
+  canvas {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .actionBtns {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 2rem;
+
+    opacity: 0;
+    transition: opacity 0.2s;
+    button {
+      border-radius: 6px !important;
+      padding: 0.2em 0.6em !important;
+      background: #f2f2f2;
+      color: #000;
+      margin: 3px;
+      outline: none;
+      border: none;
+      transition: background 0.3s;
+      i {
+        font-size: 1.4rem;
+      }
+    }
+    button:hover {
+      background: #e2e2e2;
+    }
+  }
+  .actionBtns:hover {
+    opacity: 1;
+  }
+}

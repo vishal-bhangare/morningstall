@@ -1,0 +1,188 @@
+.user {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 5px;
+  background: #2d2d2d;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10px;
+  transition: all 0.3s;
+  i {
+    font-size: 1.4rem;
+  }
+}
+.user:hover {
+  background: #000;
+}
+.userInfo {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #f1f1f1;
+  padding: 0.5rem;
+  margin: 10px;
+  border-radius: 6px;
+  transition: all 0.3s;
+  .name {
+    font-weight: 600;
+  }
+}
+
+.mainContainer {
+  width: 100%;
+  background: #fff;
+
+  .booksData {
+    .title {
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 600;
+    }
+    table {
+      margin-top: 2rem;
+      width: 100%;
+      border: 1px solid #d8d8d8;
+      text-align: center;
+
+      thead {
+        tr {
+          border-bottom: 1px solid #d8d8d8;
+          th {
+            padding: 4px 0;
+          }
+        }
+      }
+      tbody {
+        tr {
+          border-bottom: 1px solid #d8d8d8;
+          td {
+            padding: 4px 0;
+          }
+        }
+      }
+    }
+  }
+  .pdfModalClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    font-size: 1.4rem;
+  }
+  form {
+    min-width: 70%;
+    max-width: 100%;
+    margin: 0 auto;
+    .pdf,
+    .coverPage {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+    .iconBox {
+      position: absolute;
+      padding: 5px;
+      right: 0;
+      height: 100%;
+      background: #aaaaaa40;
+      border-radius: 50%;
+
+      font-size: 1.5rem;
+      .checkIcon {
+        font-weight: 900;
+        color: #2f2;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+    }
+    .actionBtns {
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+  .statusMessage {
+    background: #d8d8d8;
+    display: block;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 10px 10px 0 10px;
+    font-size: 1.1rem;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 1rem;
+    border: 1px solid #1d1d1d;
+    z-index: 1000;
+  }
+}
+
+body.activeModal {
+  overflow-y: auto;
+}
+
+.btnModal {
+  font-size: 1.5rem;
+  background: #0d6efd;
+  color: #fff;
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 20px;
+  transition: all 0.3s;
+}
+
+.modal,
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 100;
+}
+
+.overlay {
+  background: rgba(49, 49, 49, 0.8);
+  pointer-events: none;
+}
+.modalContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: 14px 28px;
+  border-radius: 3px;
+  max-width: 600px;
+  min-width: 300px;
+  max-height: 80%;
+  overflow-y: scroll;
+  z-index: 101;
+}
+
+.closeModal {
+  transform: rotate(45deg);
+  background: #dc3545;
+}
+button {
+  padding: 0.1rem 0.6rem !important;
+  border-radius: 3px !important;
+}

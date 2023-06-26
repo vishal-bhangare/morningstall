@@ -1,0 +1,17 @@
+$accent: #b83b5e;
+$primary: #f9ed69;
+$secondary: #f08a5d;
+$background-primary: #0b0f10;
+$background-secondary: #101415;
+$background-secondary-alt: #131718;
+$foreground-primary: #f6f6f6;
+
+.error {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #ff1f49;
+  background: #ff1f491f;
+  padding: 1px 6px;
+  border-radius: 6px;
+  width: fit-content;
+}
