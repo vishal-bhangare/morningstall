@@ -1,6 +1,5 @@
 const express = require("express");
 const booksRoute = express.Router();
-
 const Books = require("../models/Books");
 const { initializeApp } = require("firebase/app");
 const {
@@ -29,8 +28,6 @@ booksRoute.route("/").get((req, res, next) => {
 
 async function uploadFile(file, folder) {
   try {
-    const dateTime = giveCurrentDateTime();
-
     const storageRef = ref(storage, `${folder}/${file.originalname}`);
 
     // Create file metadata including the content type
