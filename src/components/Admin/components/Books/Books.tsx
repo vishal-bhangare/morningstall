@@ -10,14 +10,15 @@ import PdfViewer from "../../../PdfViewer/PdfViewer";
 
 const schema = z.object({
   name: z.string().min(3),
-  author: z.string(),
-  publication: z.string(),
+  author: z.string().min(1, "This field is required"),
+  publication: z.string().min(1, "This field is required"),
   publicationYear: z
     .number({ invalid_type_error: "This field is required" })
     .min(1700, "Publication year must greater than 1700's")
     .max(2024, "Publication year must less than 2024's"),
-  genre: z.string(),
-  language: z.string(),
+  genre: z.string().min(1, "This field is required"),
+  language: z.string().min(1, "This field is required"),
+  about: z.string().min(20, "Minimum 20 charaters required."),
   pdf: any(),
   coverPage: any(),
 });
@@ -36,7 +37,17 @@ const Books = () => {
   const [booksData, setBooksData] = useState([]);
   const [curUrl, setCurUrl] = useState("");
   const [pdfModal, setPdfModal] = useState(false);
+  const [pdfPages, setPdfPages] = useState(0);
 
+  const pagesInPdf = (event: any) => {
+    const reader = new FileReader();
+    reader.readAsBinaryString(event.target.files[0]);
+    reader.onloadend = () => {
+      const result = reader?.result as string;
+      setPdfPages(result.match(/\/Type[\s]*\/Page[^s]/g)!.length);
+    };
+    return pdfPages;
+  };
   useEffect(() => {
     getAllBooks()
       .then((res) => {
@@ -45,6 +56,7 @@ const Books = () => {
       })
       .catch((err) => console.error(err));
   }, [statusMessage]);
+
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -64,7 +76,6 @@ const Books = () => {
   }
   const onSubmit = (formData: FieldValues) => {
     const data = new FormData();
-    console.log(formData.name);
     {
       data.append("name", formData.name);
       data.append("author", formData.author);
@@ -74,9 +85,11 @@ const Books = () => {
       data.append("genre", formData.genre);
       data.append("pdf", formData.pdf[0]);
       data.append("coverPage", formData.coverPage[0]);
-      setStatusMessage("Upload data...", "file");
+      data.append("pages", pdfPages.toString());
     }
+    setStatusMessage("Upload data...", "file");
 
+    console.log(data);
     addBook(data)
       .then((res) => {
         setStatusMessage("Data uploaded.");
@@ -89,6 +102,7 @@ const Books = () => {
         console.log(err);
       });
   };
+
   return (
     <>
       <div className={[styles.mainContainer].join(" ")}>
@@ -170,61 +184,57 @@ const Books = () => {
                 onSubmit={handleSubmit(onSubmit)}
                 encType="multipart/form-data"
               >
-                <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
+                <div className={styles.mb}>
+                  <label htmlFor="name" className={styles.formLabel}>
                     Enter book name :
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className={styles.formControl}
                     placeholder="Book name"
                     {...register("name")}
-                    required
                   />
                   {errors.name && (
                     <p className="text-danger">{errors.name.message}</p>
                   )}
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="author" className="form-label">
+                <div className={styles.mb}>
+                  <label htmlFor="author" className={styles.formLabel}>
                     Enter author name :
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className={styles.formControl}
                     {...register("author")}
                     placeholder="Author"
-                    required
                   />
                   {errors.author && (
                     <p className="text-danger">{errors.author.message}</p>
                   )}
                 </div>
-                <div className="mb-3 publication">
-                  <label htmlFor="publication" className="form-label">
+                <div className="mb publication">
+                  <label htmlFor="publication" className={styles.formLabel}>
                     Enter publication name :
                   </label>
                   <input
                     type="text"
-                    className="form-control"
+                    className={styles.formControl}
                     id="publication"
                     {...register("publication")}
                     placeholder="Publication"
-                    required
                   />
                   {errors.publication && (
                     <p className="text-danger">{errors.publication.message}</p>
                   )}
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="publicationYear" className="form-label">
+                <div className={styles.mb}>
+                  <label htmlFor="publicationYear" className={styles.formLabel}>
                     Year of Publication :
                   </label>
                   <input
                     type="number"
                     {...register("publicationYear", { valueAsNumber: true })}
-                    className="form-control"
-                    required
+                    className={styles.formControl}
                   />
                   {errors.publicationYear && (
                     <p className="text-danger">
@@ -232,15 +242,14 @@ const Books = () => {
                     </p>
                   )}
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="language" className="form-label">
+                <div className={styles.mb}>
+                  <label htmlFor="language" className={styles.formLabel}>
                     {" "}
                     Select Language{" "}
                   </label>
                   <select
-                    className="form-select"
+                    className={styles.formSelect}
                     {...register("language")}
-                    required
                   >
                     <option selected></option>
                     {Languages.map((language, index) => {
@@ -255,16 +264,12 @@ const Books = () => {
                     <p className="text-danger">{errors.language.message}</p>
                   )}
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="genre" className="form-label">
+                <div className={styles.mb}>
+                  <label htmlFor="genre" className={styles.formLabel}>
                     {" "}
                     Select Genre{" "}
                   </label>
-                  <select
-                    className="form-select"
-                    {...register("genre")}
-                    required
-                  >
+                  <select className={styles.formSelect} {...register("genre")}>
                     <option selected></option>
                     <option value="mystery">Mystery</option>
                     {Genres.map((genre, index) => {
@@ -282,8 +287,22 @@ const Books = () => {
                     <p className="text-danger">{errors.genre.message}</p>
                   )}
                 </div>
-                <div className={["mb-3", styles.pdf].join(" ")}>
-                  <label className="form-label" htmlFor="pdf">
+                <div className={styles.mb}>
+                  <label htmlFor="about" className={styles.formLabel}>
+                    About
+                  </label>
+                  <textarea
+                    id="about"
+                    className={styles.formControl}
+                    {...register("about")}
+                    required
+                  ></textarea>
+                  {errors.about && (
+                    <p className="text-danger">{errors.about.message}</p>
+                  )}
+                </div>
+                <div className={[styles.mb, styles.pdf].join(" ")}>
+                  <label className={styles.formLabel} htmlFor="pdf">
                     Select pdf file :
                   </label>
                   <input
@@ -291,30 +310,32 @@ const Books = () => {
                     size={20}
                     accept=".pdf"
                     {...register("pdf")}
+                    onChange={pagesInPdf}
                   />
                 </div>
-                <div className={["mb-3", styles.coverPage].join(" ")}>
-                  <label className="form-label" htmlFor="pdf">
+                <div className={[styles.mb, styles.coverPage].join(" ")}>
+                  <label className={styles.formLabel} htmlFor="pdf">
                     Select cover page :
                   </label>
                   <input
                     type="file"
                     {...register("coverPage")}
                     accept=".png , .jpeg, .jpg"
+                    required
                   />
                 </div>
                 <div className={styles.actionBtns}>
                   {" "}
                   <button
                     type="submit"
-                    className="btn btn-primary"
+                    className={styles.btn + " " + styles.btnPrimary}
                     disabled={statusMessage === "Upload data..." ? true : false}
                   >
                     Add
                   </button>
                   <button
                     type="button"
-                    className="btn btn-danger"
+                    className={styles.btn + " " + styles.btnDanger}
                     onClick={toggleModal}
                     disabled={statusMessage === "Upload data..." ? true : false}
                   >

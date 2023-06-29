@@ -29,21 +29,15 @@ booksRoute.route("/").get((req, res, next) => {
 async function uploadFile(file, folder) {
   try {
     const storageRef = ref(storage, `${folder}/${file.originalname}`);
-
-    // Create file metadata including the content type
     const metadata = {
       contentType: file.mimetype,
     };
 
-    // Upload the file in the bucket storage
     const snapshot = await uploadBytesResumable(
       storageRef,
       file.buffer,
       metadata
     );
-    //by using uploadBytesResumable we can control the progress of uploading like pause, resume, cancel
-
-    // Grab the public url
     const downloadURL = await getDownloadURL(snapshot.ref);
 
     console.log("File successfully uploaded.");
@@ -72,7 +66,9 @@ booksRoute.route("/add").post(
         uploadFile(req.files["coverPage"][0], "coverPages")
           .then((url) => {
             downloadUrls.coverPage = url;
-            Object.assign(req.body, downloadUrls);
+
+            Object.assign(req.body, downloadUrls, { views: 0, favorite: 0 });
+
             Books.create(req.body)
               .then((data) => {
                 res.status(200).json(data);

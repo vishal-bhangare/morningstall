@@ -78,6 +78,76 @@
     min-width: 70%;
     max-width: 100%;
     margin: 0 auto;
+    .mb {
+      margin-bottom: 1rem;
+    }
+    .formLabel {
+      margin-bottom: 0.5rem;
+    }
+    .formControl {
+      display: block;
+      width: 100%;
+      padding: 0.375rem 0.75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 1px solid #dee2e6;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border-radius: 0.375rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      outline: none;
+    }
+    .formControl:focus,
+    .formControl:hover {
+      outline: 2px solid #91bcfc;
+    }
+    .formSelect {
+      display: block;
+      width: 100%;
+      padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #212529;
+      background-color: #fff;
+      background-repeat: no-repeat;
+      background-position: right 0.75rem center;
+      background-size: 16px 12px;
+      border: 1px solid #dee2e6;
+      border-radius: 0.375rem;
+      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+    .btn {
+      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .btnDanger {
+      color: #fff;
+      background: #dc3545;
+      border-color: #dc3545;
+    }
+    .btnDanger:hover {
+      background: #bb2d3b;
+      border-color: #bb2d3b;
+    }
+    .btnPrimary {
+      color: #fff;
+      background: #0d6efd;
+      border-color: #0d6efd;
+    }
+    .btnPrimary:hover {
+      background: #0a58ca;
+      border-color: #0a58ca;
+    }
+
     .pdf,
     .coverPage {
       display: flex;
@@ -176,6 +246,7 @@ body.activeModal {
   max-height: 80%;
   overflow-y: scroll;
   z-index: 101;
+  width: 90%;
 }
 
 .closeModal {

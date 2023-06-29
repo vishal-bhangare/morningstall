@@ -30,6 +30,12 @@ const Books = new Schema(
     views: {
       type: Number,
     },
+    favorite: {
+      type: Number,
+    },
+    about: {
+      type: String,
+    },
   },
   {
     collection: "books",

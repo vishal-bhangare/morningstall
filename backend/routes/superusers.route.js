@@ -1,8 +1,11 @@
 const express = require("express");
 const superusersRoute = express.Router();
 const Superuser = require("../models/Superuser");
-const { scryptSync, randomBytes, timingSafeEqual } = require("crypto");
+const Admin = require("../models/Admin");
 const jwt = require("jsonwebtoken");
+const authorize = require("../middlewares/auth");
+const { verifyHash, genHash } = require("../common/passwordHash");
+const { check, validationResult } = require("express-validator");
 
 superusersRoute.route("/login").post((req, res, next) => {
   Superuser.findOne({ username: req.body.username })
@@ -15,7 +18,7 @@ superusersRoute.route("/login").post((req, res, next) => {
             username: user.username,
             password: user.password,
           },
-          "VishalIndubhauBhangare",
+          process.env.TOKEN_SECRET,
           { expiresIn: "1h" }
         );
         res.status(200).json({
@@ -33,13 +36,24 @@ superusersRoute.route("/login").post((req, res, next) => {
     });
 });
 
-function verifyHash(hash, password) {
-  const [salt, key] = hash.split(":");
-  const hashedBuffer = scryptSync(password, salt, 64);
-  const keyBuffer = Buffer.from(key, "hex");
-  const match = timingSafeEqual(hashedBuffer, keyBuffer);
-
-  return match ? true : false;
-}
+superusersRoute.route("/new/admin").post(authorize, (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(422).jsonp(errors.array());
+  } else {
+    Admin.create({
+      username: req.body.username,
+      password: genHash(req.body.confirmPassword),
+    })
+      .then((response) => {
+        return res.status(200).json({ message: "User created." });
+      })
+      .catch((error) => {
+        res.status(500).json({
+          error: error,
+        });
+      });
+  }
+});
 
 module.exports = superusersRoute;

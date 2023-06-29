@@ -6,72 +6,6 @@
   height: 100vh;
   font-family: "Poppins", sans-serif;
 
-  .LoginCard {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    align-items: center;
-
-    form {
-      display: flex;
-      flex-direction: column;
-      width: 70%;
-      font-size: 1.1rem;
-      color: #111;
-      background: #ef11111a;
-      padding: 1rem;
-      border: 2px;
-      box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-        rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-      max-width: 400px;
-      label {
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-      }
-      input {
-        margin: 4px 0;
-        outline: none;
-        padding: 0.5rem 0.4rem;
-        border: none;
-        width: 100%;
-
-        background: #fff;
-        color: #111;
-      }
-      .error {
-        font-size: 0.9rem;
-        font-weight: 400;
-        color: #ff1f49;
-        background: #ff1f491f;
-        padding: 1px 6px;
-        border-radius: 6px;
-        width: fit-content;
-      }
-      button {
-        background-color: rgba($color: $secondary, $alpha: 0.8);
-        border-radius: 0;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
-        border: none;
-
-        transition: background 0.3s;
-      }
-      button:hover {
-        background-color: rgba($color: $secondary, $alpha: 1);
-        border: none;
-        outline: none;
-      }
-      .passwordVisibility {
-        font-size: 1rem;
-        input {
-          width: fit-content;
-          margin-right: 0.5rem;
-        }
-      }
-    }
-  }
-
   .main {
     .user {
       ul {
@@ -100,7 +34,7 @@
     }
     form {
       width: 80%;
-      background: rgba($color: $primary, $alpha: 0.4);
+      background: #f2ead3;
       padding: 20px;
       position: absolute;
       top: 50%;
@@ -137,10 +71,10 @@
         border-radius: 0;
         padding: 10px 0;
         transition: background 0.3s;
-        background: rgba($color: $primary, $alpha: 0.7);
+        background: rgba($color: #3f2305, $alpha: 0.9);
       }
       button:hover {
-        background: rgba($color: $primary, $alpha: 1);
+        background: rgba($color: #3f2305, $alpha: 1);
       }
     }
   }

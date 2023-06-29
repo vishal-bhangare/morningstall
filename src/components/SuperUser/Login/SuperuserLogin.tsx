@@ -27,7 +27,10 @@ const SuperuserLogin = () => {
   const onLoginSubmit = (formData: FieldValues) => {
     login(formData)
       .then((res: any) => {
-        if (res.status == 200) navigate("/superuser/dashboard");
+        if (res.status == 200) {
+          sessionStorage.setItem("token", res.data.token);
+          navigate("/superuser/dashboard");
+        }
         if (res.status == 401) alert("Invalid credentials.");
         console.log(res);
       })

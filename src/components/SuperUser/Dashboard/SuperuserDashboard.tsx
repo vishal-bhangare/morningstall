@@ -3,12 +3,18 @@ import styles from "./SuperuserDashboard.module.scss";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, useForm } from "react-hook-form";
+import { createAdmin } from "../../../services/superuser.service";
 
-const adminSchema = z.object({
-  username: z.string().min(1, "Username is required."),
-  password: z.string().min(1, "Password is required."),
-  confirmPassword: z.string().min(1, "Confirm password is required."),
-});
+const adminSchema = z
+  .object({
+    username: z.string().min(1, "Username is required."),
+    password: z.string().min(1, "Password is required."),
+    confirmPassword: z.string().min(1, "Confirm password is required."),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ["confirmPassword"],
+    message: "Passwords do not match",
+  });
 
 type AdminFormData = z.infer<typeof adminSchema>;
 
@@ -18,11 +24,17 @@ const SuperuserDashboard = () => {
   const {
     register: adminRegistor,
     handleSubmit: adminHandleSubmit,
+    reset,
     formState: { errors: adminErrors },
   } = useForm<AdminFormData>({ resolver: zodResolver(adminSchema) });
 
   const onAdminSubmit = (formData: FieldValues) => {
-    console.log(formData);
+    createAdmin(formData)
+      .then((res) => {
+        reset();
+        console.log("user is created.");
+      })
+      .catch((err) => console.log(err));
   };
 
   const toggleUserVisible = () => {

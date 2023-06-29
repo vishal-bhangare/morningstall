@@ -22,6 +22,7 @@ const app = express();
 
 const booksRoute = require("./routes/books.route");
 const superusersRoute = require("./routes/superusers.route");
+const adminsRoute = require("./routes/admins.route");
 app.use(cors());
 app.use(bodyParser.json());
 app.use(
@@ -31,6 +32,7 @@ app.use(
 );
 app.use("/api/books", booksRoute);
 app.use("/api/superuser", superusersRoute);
+app.use("/api/admin", adminsRoute);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
@@ -46,27 +48,3 @@ app.use(function (err, req, res, next) {
 
   res.status(err.statusCode).send(err.message);
 });
-
-function genHash(password) {
-  const salt = randomBytes(16).toString("hex");
-  const hashedPassword = scryptSync(password, salt, 64).toString("hex");
-  return `${salt}:${hashedPassword}`;
-}
-
-function verify(hash, password) {
-  const [salt, key] = hash.split(":");
-  const hashedBuffer = scryptSync(password, salt, 64);
-  const keyBuffer = Buffer.from(key, "hex");
-  const match = timingSafeEqual(hashedBuffer, keyBuffer);
-
-  if (match) {
-    return "login success!";
-  } else {
-    return "login fail!";
-  }
-}
-
-// var hashedPass = genHash("superuser");
-// console.log("\n", hashedPass, "\n");
-
-// console.log(verify(tempHash, "superuser"));
