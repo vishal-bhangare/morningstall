@@ -21,6 +21,9 @@ const Books = new Schema(
     genre: {
       type: String,
     },
+    edition: {
+      type: String,
+    },
     pdf: {
       type: String,
     },

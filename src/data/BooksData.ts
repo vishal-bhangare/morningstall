@@ -8,3 +8,15 @@ export const Genres = [
   "Religious",
   "Memoirs and Autobiographies",
 ];
+export const Editions = [
+  "Revised Edition",
+  "Revised and updated Edition",
+  "Co-edition",
+  "E-edition",
+  "Library Edition",
+  "Book club Edition",
+  "Cheap Edition",
+  "Cadet Edition",
+  "Large print Edition",
+  "Critical Edition",
+];

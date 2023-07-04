@@ -15,10 +15,7 @@ const Admin = () => {
             className={"fa-solid fa-user " + styles.userIcon}
           ></i>
 
-          <AnimateHeight
-            duration={500}
-            height={height} // see props documentation below
-          >
+          <AnimateHeight duration={500} height={height}>
             {" "}
             <ul>
               <li>Username</li>

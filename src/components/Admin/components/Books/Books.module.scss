@@ -78,6 +78,7 @@
     min-width: 70%;
     max-width: 100%;
     margin: 0 auto;
+    font-size: 1.1rem;
     .mb {
       margin-bottom: 1rem;
     }
@@ -86,9 +87,9 @@
     }
     .formControl {
       display: block;
-      width: 100%;
+      width: calc(100% - (0.75rem * 2));
       padding: 0.375rem 0.75rem;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 400;
       line-height: 1.5;
       color: #212529;
@@ -101,6 +102,7 @@
       border-radius: 0.375rem;
       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
       outline: none;
+      margin-top: 0.4rem;
     }
     .formControl:focus,
     .formControl:hover {
@@ -110,7 +112,7 @@
       display: block;
       width: 100%;
       padding: 0.375rem 2.25rem 0.375rem 0.75rem;
-      font-size: 1rem;
+      font-size: 1.1rem;
       font-weight: 400;
       line-height: 1.5;
       color: #212529;
@@ -124,8 +126,11 @@
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
+      margin-top: 0.4rem;
     }
     .btn {
+      padding: 0.3rem 0.6rem;
+      border-radius: 3px;
       transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
@@ -252,8 +257,4 @@ body.activeModal {
 .closeModal {
   transform: rotate(45deg);
   background: #dc3545;
-}
-button {
-  padding: 0.1rem 0.6rem !important;
-  border-radius: 3px !important;
 }

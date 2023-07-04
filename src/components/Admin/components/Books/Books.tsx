@@ -1,12 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { FieldValues, useForm } from "react-hook-form";
 import { any, set, z } from "zod";
 import styles from "./Books.module.scss";
 import { useEffect, useState } from "react";
-import { Languages, Genres } from "../../../../data/BooksData";
+import { Languages, Genres, Editions } from "../../../../data/BooksData";
 import { addBook, getAllBooks } from "../../../../services/books.service";
 import PdfViewer from "../../../PdfViewer/PdfViewer";
+import Book from "../../../../entities/Book";
 
 const schema = z.object({
   name: z.string().min(3),
@@ -18,6 +18,7 @@ const schema = z.object({
     .max(2024, "Publication year must less than 2024's"),
   genre: z.string().min(1, "This field is required"),
   language: z.string().min(1, "This field is required"),
+  edition: z.string().min(1, "This field is required"),
   about: z.string().min(20, "Minimum 20 charaters required."),
   pdf: any(),
   coverPage: any(),
@@ -34,7 +35,7 @@ const Books = () => {
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
   const [modal, setModal] = useState(false);
-  const [booksData, setBooksData] = useState([]);
+  const [booksData, setBooksData] = useState<Book[]>([]);
   const [curUrl, setCurUrl] = useState("");
   const [pdfModal, setPdfModal] = useState(false);
   const [pdfPages, setPdfPages] = useState(0);
@@ -48,13 +49,15 @@ const Books = () => {
     };
     return pdfPages;
   };
-  useEffect(() => {
+  const loadBooksData = () => {
     getAllBooks()
       .then((res) => {
         setBooksData(res.data);
-        console.log(res.data);
       })
       .catch((err) => console.error(err));
+  };
+  useEffect(() => {
+    loadBooksData();
   }, [statusMessage]);
 
   const toggleModal = () => {
@@ -83,6 +86,7 @@ const Books = () => {
       data.append("publicationYear", formData.publicationYear);
       data.append("language", formData.language);
       data.append("genre", formData.genre);
+      data.append("edition", formData.edition);
       data.append("pdf", formData.pdf[0]);
       data.append("coverPage", formData.coverPage[0]);
       data.append("pages", pdfPages.toString());
@@ -94,9 +98,8 @@ const Books = () => {
       .then((res) => {
         setStatusMessage("Data uploaded.");
         reset();
-        getAllBooks()
-          .then((res) => setBooksData(res.data))
-          .catch((err) => console.error(err));
+
+        loadBooksData();
       })
       .catch((err) => {
         console.log(err);
@@ -212,7 +215,7 @@ const Books = () => {
                     <p className="text-danger">{errors.author.message}</p>
                   )}
                 </div>
-                <div className="mb publication">
+                <div className={styles.mb}>
                   <label htmlFor="publication" className={styles.formLabel}>
                     Enter publication name :
                   </label>
@@ -249,9 +252,10 @@ const Books = () => {
                   </label>
                   <select
                     className={styles.formSelect}
+                    defaultValue={""}
                     {...register("language")}
                   >
-                    <option selected></option>
+                    <option value=""></option>
                     {Languages.map((language, index) => {
                       return (
                         <option key={index} value={language.toLowerCase()}>
@@ -269,8 +273,12 @@ const Books = () => {
                     {" "}
                     Select Genre{" "}
                   </label>
-                  <select className={styles.formSelect} {...register("genre")}>
-                    <option selected></option>
+                  <select
+                    defaultValue={""}
+                    className={styles.formSelect}
+                    {...register("genre")}
+                  >
+                    <option value=""></option>
                     <option value="mystery">Mystery</option>
                     {Genres.map((genre, index) => {
                       return (
@@ -288,6 +296,32 @@ const Books = () => {
                   )}
                 </div>
                 <div className={styles.mb}>
+                  <label htmlFor="edition" className={styles.formLabel}>
+                    {" "}
+                    Select Edition{" "}
+                  </label>
+                  <select
+                    defaultValue={""}
+                    className={styles.formSelect}
+                    {...register("edition")}
+                  >
+                    <option value=""></option>
+                    {Editions.map((edition, index) => {
+                      return (
+                        <option
+                          key={index}
+                          value={edition.toLowerCase().replace(" ", "_")}
+                        >
+                          {edition}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  {errors.edition && (
+                    <p className="text-danger">{errors.edition.message}</p>
+                  )}
+                </div>
+                <div className={styles.mb}>
                   <label htmlFor="about" className={styles.formLabel}>
                     About
                   </label>
@@ -295,7 +329,6 @@ const Books = () => {
                     id="about"
                     className={styles.formControl}
                     {...register("about")}
-                    required
                   ></textarea>
                   {errors.about && (
                     <p className="text-danger">{errors.about.message}</p>

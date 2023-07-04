@@ -18,7 +18,6 @@ const upload = multer({ storage: multer.memoryStorage() });
 booksRoute.route("/").get((req, res, next) => {
   Books.find()
     .then((data) => {
-      console.log(data);
       res.status(200).json(data);
     })
     .catch((err) => {
@@ -66,7 +65,6 @@ booksRoute.route("/add").post(
         uploadFile(req.files["coverPage"][0], "coverPages")
           .then((url) => {
             downloadUrls.coverPage = url;
-
             Object.assign(req.body, downloadUrls, { views: 0, favorite: 0 });
 
             Books.create(req.body)
