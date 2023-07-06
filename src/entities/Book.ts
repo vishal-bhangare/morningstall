@@ -12,4 +12,5 @@ export default interface Book {
   views: number;
   favorite: number;
   about: string;
+  pages: string;
 }

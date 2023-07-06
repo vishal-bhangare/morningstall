@@ -89,6 +89,7 @@ const Books = () => {
       data.append("edition", formData.edition);
       data.append("pdf", formData.pdf[0]);
       data.append("coverPage", formData.coverPage[0]);
+      data.append("about", formData.about);
       data.append("pages", pdfPages.toString());
     }
     setStatusMessage("Upload data...", "file");

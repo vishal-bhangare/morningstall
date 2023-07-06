@@ -1,10 +1,25 @@
-$accent: #b83b5e;
-$primary: #f9ed69;
-$secondary: #f08a5d;
-$background-primary: #0b0f10;
-$background-secondary: #101415;
-$background-secondary-alt: #131718;
-$foreground-primary: #f6f6f6;
+$accent: #62bfad;
+$accent_light: #91dbcd;
+$accent_dark: #3da08d;
+$accent_light_primary: #c7f2ea;
+$accent_dark_primary: #248d78;
+$primary: #f9f7e8;
+$primary-light: #fffefa;
+$primary-dark: #d0cdb5;
+$primary-darker: #b4ae87;
+$foreground-primary: #c7f2ea;
+
+$black: #000;
+$white: #fff;
+$neutral_100: #fcfcfa;
+$neutral_200: #f7f5f0;
+$neutral_300: #ebe8e4;
+$neutral_400: #d6d4d0;
+$neutral_500: #bab8b3;
+$neutral_600: #8a8884;
+$neutral_700: #73716d;
+$neutral_800: #33322f;
+$neutral_900: #1f1e1c;
 
 .error {
   font-size: 0.9rem;

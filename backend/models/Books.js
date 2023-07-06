@@ -39,6 +39,7 @@ const Books = new Schema(
     about: {
       type: String,
     },
+    pages: { type: String },
   },
   {
     collection: "books",

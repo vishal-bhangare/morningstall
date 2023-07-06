@@ -1,11 +1,16 @@
 import styles from "./Home.module.scss";
-
+import BooksGrid from "../BooksGrid/BooksGrid";
+import Header from "./Header/Header";
 const Home = () => {
   return (
     <main className={styles.main}>
-      <nav className={styles.nav}>asdf</nav>
+      <header className={styles.header}>
+        <Header />
+      </header>
       <aside className={styles.aside}>asdf</aside>
-      <section className={styles.section}>adsf</section>
+      <section className={styles.section}>
+        <BooksGrid />
+      </section>
       <footer className={styles.footer}>adsf</footer>
     </main>
   );

@@ -1,29 +1,33 @@
+@import "../../common/colors.scss";
+body {
+  background: $primary !important;
+}
 .main {
   display: grid;
-  grid-template-columns: max-content auto;
-  grid-template-rows: max-content auto max-content;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   width: 100%;
-
   height: 100%;
-  .nav {
-    grid-area: 1 / 1 / 2 / 3;
+  grid-template:
+    "header header " auto
+    "aside section " 1fr
+    "footer footer" auto /
+    auto 1fr;
+
+  .header {
+    grid-area: header;
     height: 64px;
-    background: goldenrod;
   }
 
   .aside {
-    grid-area: 2 / 1 / 3 / 2;
-    background-color: rosybrown;
+    grid-area: aside;
   }
   .section {
-    grid-area: 2 / 2 / 3 / 3;
-    background-color: mediumpurple;
+    grid-area: section;
+    height: fit-content;
   }
   .footer {
-    grid-area: 3 / 1 / 4 / 3;
-    background-color: mediumvioletred;
+    grid-area: footer;
   }
 }
 @media (max-width: 768px) {

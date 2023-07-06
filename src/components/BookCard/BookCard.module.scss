@@ -1,0 +1,48 @@
+@import "../../common/colors.scss";
+
+.card {
+  display: flex;
+  background: $white;
+  border-radius: 4px;
+  border: 1px solid $primary-dark;
+  height: 250px;
+  overflow: hidden;
+  gap: 10px;
+  margin: 10px;
+
+  .coverPage {
+    height: 100%;
+
+    img {
+      height: 100%;
+    }
+  }
+  .info {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    > span {
+      display: block;
+    }
+    .name {
+      font-size: 1.3rem;
+      font-weight: 500;
+      line-height: 120%;
+      word-spacing: -2%;
+    }
+    .about {
+      color: $neutral_800;
+      line-height: 150%;
+      word-spacing: 5%;
+    }
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+
+      .favorite {
+        color: #e73f4b;
+      }
+    }
+  }
+}
