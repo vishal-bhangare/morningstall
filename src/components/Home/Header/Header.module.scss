@@ -1,22 +1,24 @@
-@import "../../../common/colors.scss";
+@import "../../../common/common.scss";
 @import url("https://use.typekit.net/fib6ddu.css");
+
 .container {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
+  height: calc(100% - 10px);
+  width: calc(100% - 10px);
+
+  position: relative;
+  padding: 5px;
+  background: rgba($color: $primary, $alpha: 0.15);
+
   // background: #f8d8d8;
   .logo {
     color: $accent;
     font-family: "goudy-bookletter-1911", serif;
     font-weight: 400;
     font-style: normal;
-    line-height: 100%;
+    line-height: calc(64px - 10px);
     font-size: 2rem;
-    margin: auto 0;
   }
-  i {
-    font-size: 1.3rem;
-  }
+
   button {
     background: rgba($color: $primary, $alpha: 0.9);
     outline: none;
@@ -25,10 +27,31 @@
     float: right;
     padding: 10px 15px;
     transition: background 0.1s;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
   }
   button:hover {
     outline: none;
     border: none;
     background: rgba($color: $primary, $alpha: 1);
+  }
+  i {
+    float: right;
+    font-size: 1.3rem;
+    border-radius: 50%;
+    padding: 5px;
+    width: calc(1.3rem * 1.8);
+    height: calc(1.3rem * 1.8);
+    line-height: 2.34rem;
+    text-align: center;
+    background-color: #e1e1e1;
+    transition: background 0.3s;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  i:hover {
+    background-color: #d1d1d1;
   }
 }

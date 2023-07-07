@@ -1,0 +1,82 @@
+@import "./colors.scss";
+
+.tooltip_bottom::before,
+.tooltip_bottom::after {
+  --scale: 0;
+  --arrow-size: 5px;
+  --tooltip-color: #2f2f2f;
+  position: absolute;
+  bottom: -0.25rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(var(--translate-y, 0))
+    scale(var(--scale));
+  transition: 0.1s transform;
+  transform-origin: top center;
+}
+.tooltip_bottom::before {
+  --translate-y: calc(100% + var(--arrow-size));
+
+  content: attr(data-tooltip-content);
+  color: #fff;
+  padding: 0.5rem;
+  width: max-content;
+  background: var(--tooltip-color);
+  max-width: 100%;
+  height: fit-content;
+  line-height: 90%;
+  border-radius: 0.2rem;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+.tooltip_bottom:hover::after,
+.tooltip_bottom:hover::before {
+  --scale: 1;
+}
+.tooltip_bottom::after {
+  --translate-y: calc(1 * var(--arrow-size));
+  content: "";
+  border: var(--arrow-size) solid transparent;
+  border-bottom-color: var(--tooltip-color);
+  transform-origin: bottom center;
+}
+
+.tooltip_top::before,
+.tooltip_top::after {
+  --scale: 0;
+  --arrow-size: 5px;
+  --tooltip-color: #2f2f2f;
+  position: absolute;
+  top: -0.25rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(var(--translate-y, 0))
+    scale(var(--scale));
+  transition: 0.1s transform;
+  transform-origin: bottom center;
+}
+.tooltip_top::before {
+  --translate-y: calc(-100% - var(--arrow-size));
+
+  content: attr(data-tooltip-content);
+  color: #fff;
+  padding: 0.5rem;
+  width: max-content;
+  background: var(--tooltip-color);
+  max-width: 100%;
+  height: fit-content;
+  line-height: 90%;
+  border-radius: 0.2rem;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+.tooltip_top:hover::after,
+.tooltip_top:hover::before {
+  --scale: 1;
+}
+.tooltip_top::after {
+  --translate-y: calc(-1 * var(--arrow-size));
+
+  content: "";
+  border: var(--arrow-size) solid transparent;
+  border-top-color: var(--tooltip-color);
+  transform-origin: top center;
+}
