@@ -23,7 +23,7 @@ const BookCard = ({ book }: Props) => {
       <div className={styles.info}>
         <span className={styles.name}>{book.name}</span>{" "}
         <span className={styles.author}>{book.author}</span>
-        <span className={styles.about}>{book.about?.slice(0, 100)}</span>
+        <span className={styles.about}>{book.about?.slice(0, 120)}</span>
         <div className={styles.bottom}>
           <span className={styles.views}>{book.views} views</span>
           <span

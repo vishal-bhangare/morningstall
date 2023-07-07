@@ -1,6 +1,6 @@
 @import "../../common/colors.scss";
 body {
-  background: $primary !important;
+  background: $secondary !important;
 }
 .main {
   display: grid;
@@ -17,6 +17,7 @@ body {
   .header {
     grid-area: header;
     height: 64px;
+    padding: 5px;
   }
 
   .aside {

@@ -1,7 +1,34 @@
+@import "../../../common/colors.scss";
+@import url("https://use.typekit.net/fib6ddu.css");
 .container {
   height: 100%;
+  width: 100%;
   overflow: hidden;
-  img {
-    height: 100%;
+  // background: #f8d8d8;
+  .logo {
+    color: $accent;
+    font-family: "goudy-bookletter-1911", serif;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 100%;
+    font-size: 2rem;
+    margin: auto 0;
+  }
+  i {
+    font-size: 1.3rem;
+  }
+  button {
+    background: rgba($color: $primary, $alpha: 0.9);
+    outline: none;
+    border: none;
+    margin: auto 0;
+    float: right;
+    padding: 10px 15px;
+    transition: background 0.1s;
+  }
+  button:hover {
+    outline: none;
+    border: none;
+    background: rgba($color: $primary, $alpha: 1);
   }
 }
