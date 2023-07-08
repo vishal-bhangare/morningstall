@@ -4,54 +4,101 @@
 .container {
   height: calc(100% - 10px);
   width: calc(100% - 10px);
-
   position: relative;
   padding: 5px;
   background: rgba($color: $primary, $alpha: 0.15);
-
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   // background: #f8d8d8;
-  .logo {
-    color: $accent;
-    font-family: "goudy-bookletter-1911", serif;
-    font-weight: 400;
-    font-style: normal;
-    line-height: calc(64px - 10px);
-    font-size: 2rem;
-  }
 
   button {
     background: rgba($color: $primary, $alpha: 0.9);
     outline: none;
     border: none;
-    margin: auto 0;
-    float: right;
     padding: 10px 15px;
     transition: background 0.1s;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
   }
   button:hover {
     outline: none;
     border: none;
     background: rgba($color: $primary, $alpha: 1);
   }
-  i {
-    float: right;
-    font-size: 1.3rem;
-    border-radius: 50%;
-    padding: 5px;
-    width: calc(1.3rem * 1.8);
-    height: calc(1.3rem * 1.8);
-    line-height: 2.34rem;
-    text-align: center;
-    background-color: #e1e1e1;
-    transition: background 0.3s;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
+
+  .start {
+    .logo {
+      color: $accent;
+      font-family: "goudy-bookletter-1911", serif;
+      font-weight: 400;
+      font-style: normal;
+      line-height: calc(64px - 10px);
+      font-size: 2rem;
+      margin-left: 1rem;
+    }
   }
-  i:hover {
-    background-color: #d1d1d1;
+  .center {
+    .searchBox {
+      height: 2rem;
+      cursor: pointer;
+      min-width: fit-content;
+      background-color: $foreground_primary;
+      border-radius: 4px;
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      padding: 5px 5px 5px 10px;
+      color: $neutral_800;
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+      i {
+        margin: 0 6px 0 3px;
+      }
+      input {
+        font-size: 0.95rem;
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #000;
+        max-width: 500px;
+        height: 100%;
+        padding: 0 4px;
+        color: $neutral_900;
+      }
+    }
+  }
+  .end {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .searchIcon {
+      display: none;
+    }
+    i {
+      border-radius: 50%;
+      color: #222;
+    }
+    .iconBtn_lg:hover {
+      background-color: #11111125;
+    }
+
+    .userIcon {
+      background-color: #11111115;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    .center {
+      .searchBox {
+        display: none;
+      }
+    }
+    .end {
+      .searchIcon {
+        display: block;
+      }
+    }
   }
 }

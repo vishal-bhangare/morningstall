@@ -25,6 +25,7 @@ body {
   .section {
     grid-area: section;
     height: fit-content;
+    margin: auto;
   }
   .footer {
     grid-area: footer;

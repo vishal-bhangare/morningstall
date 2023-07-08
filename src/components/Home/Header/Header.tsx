@@ -5,20 +5,54 @@ const Header = () => {
 
   return (
     <div className={styles.container}>
-      <span className={styles.logo}>Morningstall</span>{" "}
+      <div className={styles.start}>
+        <span className={styles.logo}>Morningstall</span>{" "}
+      </div>
       {/* <img src="src/assets/logo.png" alt="loading" /> */}
-      <button
-        className={styles.tooltip_bottom}
-        data-tooltip-content="Click here to proceed"
-      >
-        Signin
-      </button>
-      {isLoggedIn && <i className="fa-duotone fa-user"></i>}
-      {isLoggedIn && (
+      <div className={styles.center}>
+        <div className={styles.searchBox}>
+          <i className={["fa-solid", "fa-magnifying-glass"].join(" ")}></i>
+          <input
+            type="text"
+            name="search_query"
+            id="search_query"
+            placeholder="Find books.."
+          />
+          <i className={["fa-solid", "fa-xmark", styles.iconBtn].join(" ")}></i>
+        </div>
+      </div>
+      <div className={styles.end}>
         <i
-          className={["fa-duotone", "fa-books", styles.bookshelfIcon].join(" ")}
+          className={[
+            "fa-solid",
+            "fa-magnifying-glass",
+            styles.searchIcon,
+            styles.iconBtn_md,
+          ].join(" ")}
         ></i>
-      )}
+        {/* {isLoggedIn && (
+          <i
+            className={[
+              "fa-solid",
+              "fa-books",
+              styles.bookshelfIcon,
+              styles.iconBtn_md,
+            ].join(" ")}
+          ></i>
+        )}
+        {isLoggedIn && (
+          <i
+            className={[
+              "fa-duotone",
+              "fa-user",
+              styles.userIcon,
+              styles.iconBtn_md,
+            ].join(" ")}
+          ></i>
+        )} */}
+
+        <button>Signin</button>
+      </div>
     </div>
   );
 };
