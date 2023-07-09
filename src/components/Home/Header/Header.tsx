@@ -18,7 +18,21 @@ const Header = () => {
             id="search_query"
             placeholder="Find books.."
           />
-          <i className={["fa-solid", "fa-xmark", styles.iconBtn].join(" ")}></i>
+          <i
+            className={[
+              "fa-solid",
+              "fa-xmark",
+              styles.iconBtn,
+              styles.clear,
+            ].join(" ")}
+          ></i>
+          <div className={styles.suggestionContainer}>
+            <ul>
+              <li>item3</li>
+              <li>item2</li>
+              <li>item1</li>
+            </ul>
+          </div>
         </div>
       </div>
       <div className={styles.end}>

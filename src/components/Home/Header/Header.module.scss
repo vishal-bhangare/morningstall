@@ -37,6 +37,7 @@
     }
   }
   .center {
+    width: 50%;
     .searchBox {
       height: 2rem;
       cursor: pointer;
@@ -46,12 +47,18 @@
       display: flex;
       justify-content: start;
       align-items: center;
-      padding: 5px 5px 5px 10px;
+      flex-wrap: wrap;
       color: $neutral_800;
       box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-        rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-      i {
-        margin: 0 6px 0 3px;
+        #00000014 0px 0px 0px 1px;
+      padding: 2px 0;
+
+      i:nth-child(1) {
+        margin: 0 3px 0 10px;
+      }
+      .clear {
+        margin-right: 6px;
+        margin-left: auto;
       }
       input {
         font-size: 0.95rem;
@@ -60,10 +67,15 @@
         border: none;
         outline: none;
         color: #000;
-        max-width: 500px;
         height: 100%;
         padding: 0 4px;
         color: $neutral_900;
+      }
+      .suggestionContainer {
+        flex-basis: 100%;
+        background: rebeccapurple;
+        border-radius: 3px;
+        margin-top: 0.5rem;
       }
     }
   }
