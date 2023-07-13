@@ -1,31 +1,64 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
+import { useMediaQuery } from "react-responsive";
+import { Link } from "react-router-dom";
+import Logo from "../../Logo/Logo";
 const Header = () => {
   const [isLoggedIn, setLoggedIn] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchBoxVisibility, setSearchBoxVisibility] = useState(false);
+  const isBigScreen = useMediaQuery({ query: "(min-width: 1024px)" });
 
+  const toggleSearchBox = () => {
+    setSearchBoxVisibility(!searchBoxVisibility);
+  };
+  useEffect(() => {
+    if (isBigScreen) {
+      toggleSearchBox();
+    }
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.start}>
-        <span className={styles.logo}>Morningstall</span>{" "}
+        <Logo />
+        {/* <span className={styles.logo}>Morningstall</span>{" "} */}
       </div>
       {/* <img src="src/assets/logo.png" alt="loading" /> */}
-      <div className={styles.center}>
+      <div
+        className={styles.center}
+        style={{ display: searchBoxVisibility ? "flex" : "none", opacity: 1 }}
+      >
+        <i
+          className={[
+            "fa-solid",
+            "fa-arrow-left",
+            styles.iconBtn_sm,
+            styles.backToHome,
+          ].join(" ")}
+          onClick={toggleSearchBox}
+        ></i>
         <div className={styles.searchBox}>
           <i className={["fa-solid", "fa-magnifying-glass"].join(" ")}></i>
           <input
             type="text"
             name="search_query"
             id="search_query"
-            placeholder="Find books.."
+            placeholder="Find books..."
+            onChange={(e) => {
+              setSearchQuery(e?.target?.value);
+            }}
           />
+
           <i
             className={[
               "fa-solid",
-              "fa-xmark",
+              "fa-arrow-right",
               styles.iconBtn,
               styles.clear,
+              !searchQuery ? styles.disabled : null,
             ].join(" ")}
           ></i>
+
           <div className={styles.suggestionContainer}>
             <ul>
               <li>item3</li>
@@ -43,6 +76,7 @@ const Header = () => {
             styles.searchIcon,
             styles.iconBtn_md,
           ].join(" ")}
+          onClick={toggleSearchBox}
         ></i>
         {/* {isLoggedIn && (
           <i
@@ -65,7 +99,9 @@ const Header = () => {
           ></i>
         )} */}
 
-        <button>Signin</button>
+        <button>
+          <Link to="/login">Signin</Link>
+        </button>
       </div>
     </div>
   );

@@ -1,0 +1,11 @@
+@import url("https://use.typekit.net/fib6ddu.css");
+@import "../../common/common.scss";
+
+.logo {
+  color: $accent;
+  font-family: "goudy-bookletter-1911", serif;
+  font-weight: 400;
+  font-style: normal;
+  line-height: calc(64px - 10px);
+  font-size: 2rem;
+}

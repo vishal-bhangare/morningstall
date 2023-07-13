@@ -5,6 +5,7 @@ import Home from "./components/Home/Home";
 import RootLayout from "./components/RootLayout";
 import SuperuserDashboard from "./components/SuperUser/Dashboard/SuperuserDashboard";
 import SuperuserLogin from "./components/SuperUser/Login/SuperuserLogin";
+import Login from "./components/Login/Login";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
+      { path: "/login", element: <Login /> },
       { path: "/admin", element: <Admin /> },
       { path: "/superuser/login", element: <SuperuserLogin /> },
       { path: "/superuser/dashboard", element: <SuperuserDashboard /> },

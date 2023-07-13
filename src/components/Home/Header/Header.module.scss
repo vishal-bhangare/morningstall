@@ -1,28 +1,28 @@
 @import "../../../common/common.scss";
-@import url("https://use.typekit.net/fib6ddu.css");
 
 .container {
   height: calc(100% - 10px);
   width: calc(100% - 10px);
   position: relative;
   padding: 5px;
-  background: rgba($color: $primary, $alpha: 0.15);
+  background: $white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   // background: #f8d8d8;
-
   button {
-    background: rgba($color: $primary, $alpha: 0.9);
+    background: #111;
     outline: none;
     border: none;
-    padding: 10px 15px;
-    transition: background 0.1s;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0;
+    transition: all 0.3s;
+    border-radius: 2px;
   }
   button:hover {
     outline: none;
     border: none;
-    background: rgba($color: $primary, $alpha: 1);
+    border-radius: 6px;
   }
 
   .start {
@@ -38,6 +38,9 @@
   }
   .center {
     width: 50%;
+    > i {
+      display: none;
+    }
     .searchBox {
       height: 2rem;
       cursor: pointer;
@@ -52,6 +55,8 @@
       box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
         #00000014 0px 0px 0px 1px;
       padding: 2px 0;
+      max-width: 90%;
+      width: 100%;
 
       i:nth-child(1) {
         margin: 0 3px 0 10px;
@@ -84,6 +89,10 @@
     justify-content: center;
     align-items: center;
     .searchIcon {
+      background-color: $foreground_primary;
+      // border-radius: 4px;
+      padding: 0.2rem;
+      margin: 0 4px;
       display: none;
     }
     i {
@@ -100,11 +109,30 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1024px) {
   .container {
     .center {
+      width: calc(100% - 20px);
+      position: absolute;
+      background-color: #fff;
+      display: none;
+      flex-direction: row;
+      justify-content: center;
+      height: 100vh;
+      top: 0;
+      left: 0;
+      padding: 10px;
+      opacity: 0;
+      transform: opacity 1s ease-in-out;
+      > i {
+        display: block;
+        margin-right: auto;
+      }
       .searchBox {
-        display: none;
+        // display: none;
+        flex-basis: 80%;
+        margin: 0 auto;
+        opacity: 1;
       }
     }
     .end {
@@ -113,4 +141,9 @@
       }
     }
   }
+}
+
+.disabled {
+  color: $neutral_600;
+  pointer-events: none;
 }

@@ -128,3 +128,12 @@
 .iconBtn_lg:hover {
   background-color: #11111125;
 }
+
+button > a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+button > a:hover {
+  color: #ffffffee;
+}
