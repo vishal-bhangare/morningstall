@@ -25,31 +25,42 @@ const Login = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <Logo color="#111" />
-        <span className={styles.title}>Welcome back.</span>
-        <span className={styles.subtitle}>Resume your readings.</span>
-        <label htmlFor="username">
-          Username :
-          <input type="text" id="username" {...register("username")} />
-          {errors.username && (
-            <span className={styles.error}>{errors.username.message}</span>
-          )}
-        </label>
-        <label htmlFor="password">
-          Password :
-          <input id="password" {...register("password")} />
-          {errors.username && (
-            <div className={styles.error}>{errors.username.message}</div>
-          )}
-        </label>
-        <input type="checkbox" id="remember" {...register("remember")} />{" "}
-        <label htmlFor="remember">Remember me.</label>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
+      <Logo color="#111" font_size="1.5rem" />
+      <span className={styles.title}>Welcome back</span>
+      <span className={styles.subtitle}>Resume your readings.</span>
+      <label htmlFor="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        placeholder="Enter your username"
+        {...register("username")}
+      />
+      {errors.username && (
+        <span className={styles.error}>{errors.username.message}</span>
+      )}
+      <label htmlFor="password">Password</label>{" "}
+      <input
+        type="password"
+        id="password"
+        placeholder="Enter your password"
+        {...register("password")}
+      />
+      {errors.username && (
+        <div className={styles.error}>{errors.username.message}</div>
+      )}
+      <div className={styles.rememberWrapper}>
+        <div>
+          <input type="checkbox" id="remember" {...register("remember")} />{" "}
+          <label htmlFor="remember">Remember me.</label>
+        </div>
         <Link to="/login">Forget password</Link>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+      </div>
+      <button type="submit">Login</button>
+      <span className={styles.footer}>
+        Don't have an account? <Link to="#">Sign up</Link>
+      </span>
+    </form>
   );
 };
 
