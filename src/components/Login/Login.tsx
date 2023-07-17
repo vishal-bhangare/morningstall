@@ -57,6 +57,10 @@ const Login = () => {
         <Link to="/login">Forget password</Link>
       </div>
       <button type="submit">Login</button>
+      <span>
+        <center>OR</center>
+      </span>
+      <button className={styles.google}>Sign in with Google</button>
       <span className={styles.footer}>
         Don't have an account? <Link to="/signup">Sign up</Link>
       </span>

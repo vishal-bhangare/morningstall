@@ -45,6 +45,27 @@
     margin-bottom: 0.5rem;
     line-height: 1;
   }
+  button[type="submit"] {
+    margin-bottom: 1rem;
+  }
+  .google {
+    margin-top: 1rem;
+    background: #fff;
+    color: #111;
+    border: 1px solid #1111112e;
+    height: 48px;
+    background: url("https://img.icons8.com/color/32/google-logo.png") no-repeat;
+    background-position: 15% 50%;
+
+    span {
+      margin: auto 0;
+    }
+  }
+  .google:hover {
+    background-position: 15% 50%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border: 1px solid #1111112e;
+  }
   .footer {
     margin-top: 1.5rem;
     color: $neutral_800;

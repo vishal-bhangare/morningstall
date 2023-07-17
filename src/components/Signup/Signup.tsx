@@ -63,6 +63,10 @@ const Signup = () => {
         <div className={styles.error}>{errors.password.message}</div>
       )}
       <button type="submit">Signup</button>
+      <span>
+        <center>OR</center>
+      </span>
+      <button className={styles.google}>Sign in with Google</button>
       <span className={styles.footer}>
         Already have an account? <Link to="/login">Log in</Link>
       </span>
