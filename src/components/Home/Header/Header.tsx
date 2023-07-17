@@ -49,15 +49,16 @@ const Header = () => {
             }}
           />
 
-          <i
-            className={[
-              "fa-solid",
-              "fa-arrow-right",
-              styles.iconBtn,
-              styles.clear,
-              !searchQuery ? styles.disabled : null,
-            ].join(" ")}
-          ></i>
+          {searchQuery && (
+            <i
+              className={[
+                "fa-solid",
+                "fa-xmark",
+                styles.iconBtn,
+                styles.clear,
+              ].join(" ")}
+            ></i>
+          )}
 
           <div className={styles.suggestionContainer}>
             <ul>

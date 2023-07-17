@@ -1,0 +1,114 @@
+@import "../../common/common.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  width: 90%;
+  height: max-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 1rem 1.5rem;
+  font-family: "Poppins", sans-serif;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px,
+    rgba(100, 100, 111, 0.1) 0px 7px 1000px 0px;
+
+  .title {
+    font-size: 1.7rem;
+    font-weight: 500;
+    margin: 0 auto;
+    margin-top: 1rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+    margin: 0 auto;
+    color: $neutral_800;
+    margin-bottom: 1.5rem;
+  }
+  label {
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0.2rem 0;
+  }
+  input[type="text"],
+  input[type="password"] {
+    background: #fff;
+    outline: none;
+    border: 1px solid $neutral_400;
+    color: #111;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    line-height: 1;
+  }
+  .footer {
+    margin-top: 1.5rem;
+    color: $neutral_800;
+  }
+  a {
+    color: #111;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #111;
+    text-decoration: underline;
+  }
+  button {
+    background: #111;
+    outline: none;
+    border: none;
+    padding: 0.5rem 0.8rem;
+    border-radius: 0;
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+  button:hover {
+    outline: none;
+    border: none;
+    border-radius: 4px;
+  }
+
+  input[type="checkbox"] {
+    position: relative;
+    border: 2px solid #000;
+    border-radius: 2px;
+    background: none;
+    cursor: pointer;
+    line-height: 0;
+    margin: 0.2rem 0;
+    outline: 0;
+    padding: 0 !important;
+    vertical-align: text-top;
+    height: 1rem;
+    width: 1rem;
+    -webkit-appearance: none;
+    opacity: 0.5;
+  }
+
+  input[type="checkbox"]:hover {
+    opacity: 1;
+  }
+
+  input[type="checkbox"]:checked {
+    background-color: #000;
+    opacity: 1;
+  }
+
+  input[type="checkbox"]:before {
+    content: "";
+    position: absolute;
+    right: 50%;
+    top: 50%;
+    width: 3px;
+    height: 8px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    margin: -1px -1px 0 -1px;
+    transform: rotate(45deg) translate(-50%, -50%);
+    z-index: 2;
+  }
+}
