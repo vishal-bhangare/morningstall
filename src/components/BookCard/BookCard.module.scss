@@ -1,7 +1,7 @@
 @import "../../common/colors.scss";
 
 .card {
-  flex: 0 0 calc(33% - 22px);
+  flex: 1 1 calc(33% - 22px);
   display: flex;
   background: #fff;
   border-radius: 4px;
@@ -9,8 +9,9 @@
   height: 250px;
   overflow: clip;
   gap: 10px;
-  margin: 10px;
+  margin: 0.6rem;
   min-width: 400px;
+  max-width: 500px;
 
   .coverPage {
     height: 100%;

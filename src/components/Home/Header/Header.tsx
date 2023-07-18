@@ -60,13 +60,13 @@ const Header = () => {
             ></i>
           )}
 
-          <div className={styles.suggestionContainer}>
+          {/* <div className={styles.suggestionContainer}>
             <ul>
               <li>item3</li>
               <li>item2</li>
               <li>item1</li>
             </ul>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className={styles.end}>

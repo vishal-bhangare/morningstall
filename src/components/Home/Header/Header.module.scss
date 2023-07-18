@@ -109,7 +109,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 480px) {
   .container {
     .center {
       width: calc(100% - 20px);
@@ -126,7 +126,10 @@
       transform: opacity 1s ease-in-out;
       > i {
         display: block;
-        margin-right: auto;
+        position: absolute;
+        left: 0;
+        top: 0;
+        margin: 8px;
       }
       .searchBox {
         // display: none;
@@ -142,7 +145,13 @@
     }
   }
 }
-
+@media (min-width: 480px) {
+  .container {
+    .center {
+      display: flex !important;
+    }
+  }
+}
 .disabled {
   color: $neutral_600;
   pointer-events: none;
