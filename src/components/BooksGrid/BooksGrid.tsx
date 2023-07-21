@@ -20,6 +20,9 @@ const BooksGrid = () => {
       {booksData.map((book) => (
         <BookCard book={book} />
       ))}
+      {booksData.map((book) => (
+        <BookCard book={book} />
+      ))}
     </div>
   );
 };

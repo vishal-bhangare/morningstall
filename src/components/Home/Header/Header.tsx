@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <div className={styles.container}>
       <div className={styles.start}>
-        <Logo />
+        <Logo color="#111" />
         {/* <span className={styles.logo}>Morningstall</span>{" "} */}
       </div>
       {/* <img src="src/assets/logo.png" alt="loading" /> */}

@@ -7,6 +7,7 @@ import { Languages, Genres, Editions } from "../../../../data/BooksData";
 import { addBook, getAllBooks } from "../../../../services/books.service";
 import PdfViewer from "../../../PdfViewer/PdfViewer";
 import Book from "../../../../entities/Book";
+import { replaceAll } from "../../../../common/common";
 
 const schema = z.object({
   name: z.string().min(3),
@@ -285,7 +286,7 @@ const Books = () => {
                       return (
                         <option
                           key={index}
-                          value={genre.toLowerCase().replace(" ", "_")}
+                          value={replaceAll(genre.toLowerCase(), " ", "_")}
                         >
                           {genre}
                         </option>
@@ -311,7 +312,7 @@ const Books = () => {
                       return (
                         <option
                           key={index}
-                          value={edition.toLowerCase().replace(" ", "_")}
+                          value={replaceAll(edition.toLowerCase(), " ", "_")}
                         >
                           {edition}
                         </option>

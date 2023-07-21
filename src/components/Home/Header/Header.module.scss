@@ -2,9 +2,9 @@
 
 .container {
   height: calc(100% - 10px);
-  width: calc(100% - 10px);
+  width: calc(100% - 20px);
   position: relative;
-  padding: 5px;
+  padding: 5px 10px;
   background: $white;
   display: flex;
   justify-content: space-between;
