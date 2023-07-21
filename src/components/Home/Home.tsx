@@ -20,19 +20,20 @@ const Home = () => {
               Popularity
             </option>
           </select>
-          <label htmlFor="language">Language:</label>
-
-          {Languages.map((language, index) => (
-            <label htmlFor={language.toLowerCase()}>
-              <input
-                type="checkbox"
-                key={index}
-                id={language.toLowerCase()}
-                value={language.toLowerCase()}
-              />
-              {language}
-            </label>
-          ))}
+          <label htmlFor="languages">Language:</label>
+          <div id={styles.languages}>
+            {Languages.map((language, index) => (
+              <label htmlFor={language.toLowerCase()}>
+                <input
+                  type="checkbox"
+                  key={index}
+                  id={language.toLowerCase()}
+                  value={language.toLowerCase()}
+                />
+                {language}
+              </label>
+            ))}
+          </div>
           <label htmlFor="genre">Genre</label>
           <select id="genre">
             <option value="" selected></option>

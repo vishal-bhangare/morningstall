@@ -32,6 +32,27 @@ body {
       display: flex;
       flex-direction: column;
       padding: 1rem 0.5rem;
+      > label {
+        font-size: 1.1rem;
+        padding-top: 0.5rem;
+      }
+      select {
+        color: #111;
+        background: #fff;
+        border: 1px solid #1115;
+        outline: none;
+        border-radius: 6px;
+        padding: 0.2rem 0.4rem;
+        font-size: 1rem;
+      }
+      select:hover {
+        border: 1px solid #111a;
+      }
+      div#languages {
+        label {
+          display: block;
+        }
+      }
     }
   }
   .section {
