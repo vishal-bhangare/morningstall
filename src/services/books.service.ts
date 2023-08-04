@@ -14,3 +14,6 @@ export function addBook(data: FormData) {
 export function getAllBooks() {
   return axios.get(`${API_URL}/`);
 }
+export function getBookInfo(id: string) {
+  return axios.get(`${API_URL}/books/${id}`);
+}

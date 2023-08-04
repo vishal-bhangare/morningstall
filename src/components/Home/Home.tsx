@@ -14,11 +14,10 @@ const Home = () => {
         <form>
           <label htmlFor="sortBy">Sort By:</label>
           <select>
+            <option selected></option>
             <option value="added">Added Date</option>
             <option value="published">Published Date</option>
-            <option value="popularity" selected>
-              Popularity
-            </option>
+            <option value="popularity">Popularity</option>
           </select>
           <label htmlFor="languages">Language:</label>
           <div id={styles.languages}>

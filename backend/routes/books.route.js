@@ -24,6 +24,15 @@ booksRoute.route("/").get((req, res, next) => {
       return next(err);
     });
 });
+booksRoute.route("/books/:id").get((req, res, next) => {
+  Books.findById(req.params.id)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      return next(err);
+    });
+});
 
 async function uploadFile(file, folder) {
   try {

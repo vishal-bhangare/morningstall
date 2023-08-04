@@ -17,6 +17,7 @@ const schema = z.object({
     .number({ invalid_type_error: "This field is required" })
     .min(1700, "Publication year must greater than 1700's")
     .max(2024, "Publication year must less than 2024's"),
+  isbn: z.string().min(1, "This field is required"),
   genre: z.string().min(1, "This field is required"),
   language: z.string().min(1, "This field is required"),
   edition: z.string().min(1, "This field is required"),
@@ -85,6 +86,7 @@ const Books = () => {
       data.append("author", formData.author);
       data.append("publication", formData.publication);
       data.append("publicationYear", formData.publicationYear);
+      data.append("isbn", formData.isbn);
       data.append("language", formData.language);
       data.append("genre", formData.genre);
       data.append("edition", formData.edition);
@@ -245,6 +247,19 @@ const Books = () => {
                     <p className="text-danger">
                       {errors.publicationYear.message}
                     </p>
+                  )}
+                </div>
+                <div className={styles.mb}>
+                  <label htmlFor="isbn" className={styles.formLabel}>
+                    Isbn :
+                  </label>
+                  <input
+                    type="text"
+                    {...register("isbn")}
+                    className={styles.formControl}
+                  />
+                  {errors.isbn && (
+                    <p className="text-danger">{errors.isbn.message}</p>
                   )}
                 </div>
                 <div className={styles.mb}>

@@ -15,6 +15,9 @@ const Books = new Schema(
     publicationYear: {
       type: Number,
     },
+    isbn: {
+      type: String,
+    },
     language: {
       type: String,
     },

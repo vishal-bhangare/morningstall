@@ -1,0 +1,35 @@
+@import "../../common/colors.scss";
+.content {
+  padding: 0.7rem;
+  .details {
+    display: flex;
+    height: 300px;
+    gap: 1rem;
+    border: 1px solid $neutral_400;
+    border-radius: 5px;
+    padding: 0.5rem;
+    img {
+      height: 100%;
+      border-radius: 3px;
+    }
+    div {
+      display: flex;
+      flex-direction: column;
+
+      .name {
+        font-size: 1.2rem;
+        font-weight: 500;
+      }
+    }
+  }
+  .description {
+    padding: 0.5rem 0;
+    .title {
+      display: block;
+      font-size: 1.1rem;
+    }
+    .about {
+      text-align: justify;
+    }
+  }
+}

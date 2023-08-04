@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Book from "../../entities/Book";
 import styles from "./BookCard.module.scss";
+import { Link } from "react-router-dom";
 
 interface Props {
   book: Book;
@@ -21,7 +22,9 @@ const BookCard = ({ book }: Props) => {
         <img src={book.coverPage} />
       </div>
       <div className={styles.info}>
-        <span className={styles.name}>{book.name}</span>{" "}
+        <Link to={"/books/" + book._id} className={styles.name}>
+          {book.name}
+        </Link>{" "}
         <span className={styles.author}>{book.author}</span>
         <span className={styles.about}>{book.about?.slice(0, 120)}</span>
         <div className={styles.bottom}>
