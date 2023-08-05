@@ -55,7 +55,7 @@ async function uploadFile(file, folder) {
   }
 }
 downloadUrls = { pdf: "", coverPage: "" };
-data = {};
+
 booksRoute.route("/add").post(
   upload.fields([
     {
@@ -74,8 +74,13 @@ booksRoute.route("/add").post(
         uploadFile(req.files["coverPage"][0], "coverPages")
           .then((url) => {
             downloadUrls.coverPage = url;
-            Object.assign(req.body, downloadUrls, { views: 0, favorite: 0 });
-
+            Object.assign(req.body, downloadUrls, {
+              views: 0,
+              favorite: 0,
+              added_on: new Date(),
+              tags: req.body.tags.split(","),
+            });
+            console.log(req.body);
             Books.create(req.body)
               .then((data) => {
                 res.status(200).json(data);
@@ -84,19 +89,27 @@ booksRoute.route("/add").post(
                 return next(err);
               });
           })
-          .catch((err) => res.status(402).res.send(err));
+          .catch((err) => next(err));
       })
-      .catch((err) => res.status(402).res.send(err));
+      .catch((err) => next(err));
   }
 );
-const giveCurrentDateTime = () => {
-  const today = new Date();
-  const date =
-    today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-  const time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  const dateTime = date + " " + time;
-  return dateTime;
+const getDateDiff = (diff) => {
+  diffsec = diff / 1000;
+  if (diffsec < 60) return diffsec + " seconds";
+  else if (diffsec >= 60 && diffsec < 3600)
+    return Math.floor(diffsec / 60) + " minutes";
+  else if (diffsec >= 3600 && diffsec < 86400)
+    return Math.floor(diffsec / 3600) + " hrs";
+  else if (diffsec >= 86400 && diffsec < 2592000)
+    return diffsec / 86400 + " days";
+  else if (diffsec >= 2592000 && diffsec < 31536000)
+    return Math.floor(diffsec / 2592000) + " months";
+  else if (diffsec >= 31536000) return Math.floor(diffsec / 31536000) + " yrs";
 };
+// const today = new Date("2023-08-08T05:20:02.144Z");
+// const prev = new Date("2023-07-09T05:20:02.144Z");
+// const diff = today - prev;
 
+// console.log(getDateDiff(diff));
 module.exports = booksRoute;

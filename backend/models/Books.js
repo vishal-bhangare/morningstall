@@ -42,6 +42,9 @@ const Books = new Schema(
     about: {
       type: String,
     },
+    tags: { type: [String] },
+    added_by: { type: String },
+    added_on: { type: Date },
     pages: { type: String },
   },
   {

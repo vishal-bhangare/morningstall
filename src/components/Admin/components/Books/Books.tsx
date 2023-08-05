@@ -24,6 +24,7 @@ const schema = z.object({
   about: z.string().min(20, "Minimum 20 charaters required."),
   pdf: any(),
   coverPage: any(),
+  tags: z.string(),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -79,6 +80,7 @@ const Books = () => {
       }, 3000);
     }
   }
+  const user = "admin";
   const onSubmit = (formData: FieldValues) => {
     const data = new FormData();
     {
@@ -94,9 +96,10 @@ const Books = () => {
       data.append("coverPage", formData.coverPage[0]);
       data.append("about", formData.about);
       data.append("pages", pdfPages.toString());
+      data.append("tags", formData.tags);
+      data.append("added_by", user);
     }
     setStatusMessage("Upload data...", "file");
-
     console.log(data);
     addBook(data)
       .then((res) => {
@@ -349,6 +352,21 @@ const Books = () => {
                   ></textarea>
                   {errors.about && (
                     <p className="text-danger">{errors.about.message}</p>
+                  )}
+                </div>
+                <div className={styles.mb}>
+                  <label htmlFor="tags" className={styles.formLabel}>
+                    Tags :
+                  </label>
+                  <input
+                    type="text"
+                    className={styles.formControl}
+                    id="tags"
+                    {...register("tags")}
+                    placeholder="Enter tags for book."
+                  />
+                  {errors.tags && (
+                    <p className="text-danger">{errors.tags.message}</p>
                   )}
                 </div>
                 <div className={[styles.mb, styles.pdf].join(" ")}>

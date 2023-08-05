@@ -9,9 +9,10 @@ const BooksGrid = () => {
     getAllBooks()
       .then((res) => {
         setBooksData(res.data);
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
   return (
     <div className={styles.container}>
       {booksData.map((book) => (

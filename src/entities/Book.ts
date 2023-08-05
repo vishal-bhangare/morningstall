@@ -14,4 +14,7 @@ export default interface Book {
   favorite: number;
   about: string;
   pages: string;
+  added_by: string;
+  added_on: string;
+  tags: string[];
 }
