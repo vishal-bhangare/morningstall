@@ -12,6 +12,8 @@ export default interface Book {
   coverPage: string;
   views: number;
   favorite: number;
+  likes: number;
+  rating: number;
   about: string;
   pages: string;
   added_by: string;

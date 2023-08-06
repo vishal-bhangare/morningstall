@@ -39,6 +39,12 @@ const Books = new Schema(
     favorite: {
       type: Number,
     },
+    likes: {
+      type: Number,
+    },
+    rating: {
+      type: Number,
+    },
     about: {
       type: String,
     },
