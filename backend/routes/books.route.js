@@ -16,7 +16,11 @@ const storage = getStorage();
 const upload = multer({ storage: multer.memoryStorage() });
 
 booksRoute.route("/").get((req, res, next) => {
-  Books.find()
+  let query = {};
+  s;
+  let tags = Object.values(req.query);
+  if (tags.length) query.tags = { $all: tags };
+  Books.find(query)
     .then((data) => {
       res.status(200).json(data);
     })
@@ -24,7 +28,25 @@ booksRoute.route("/").get((req, res, next) => {
       return next(err);
     });
 });
-booksRoute.route("/books/:id").get((req, res, next) => {
+booksRoute.route("/search").get((req, res, next) => {
+  const query = {
+    $text: { $search: req.query.q },
+  };
+  if (req.query.lang) query.language = req.query.lang;
+  if (req.query.genre) query.genre = req.query.genre;
+  if (req.query.edition) query.edition = req.query.edition;
+
+  console.log(query);
+  Books.find(query)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      return next(err);
+    });
+});
+
+booksRoute.route("/:id").get((req, res, next) => {
   Books.findById(req.params.id)
     .then((data) => {
       res.status(200).json(data);
@@ -33,8 +55,6 @@ booksRoute.route("/books/:id").get((req, res, next) => {
       return next(err);
     });
 });
-
-
 
 async function uploadFile(file, folder) {
   try {

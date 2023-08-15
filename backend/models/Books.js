@@ -26,6 +26,12 @@ const Books = new Schema(
     collection: "books",
   }
 );
+Books.index({
+  name: "text",
+  author: "text",
+  publication: "text",
+  isbn: "text",
+});
 module.exports = mongoose.model("Books", Books);
 // {
 //   "bookname": "asdf",
