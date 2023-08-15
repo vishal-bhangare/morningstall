@@ -13,11 +13,10 @@ const schema = z.object({
   name: z.string().min(3),
   author: z.string().min(1, "This field is required"),
   publication: z.string().min(1, "This field is required"),
-  publicationYear: z
-    .number({ invalid_type_error: "This field is required" })
-    .min(1700, "Publication year must greater than 1700's")
-    .max(2024, "Publication year must less than 2024's"),
-  isbn: z.string().min(1, "This field is required"),
+  publicationYear: z.number({ invalid_type_error: "This field is required" }),
+  // .min(1700, "Publication year must greater than 1700's")
+  // .max(2024, "Publication year must less than 2024's")z,
+  isbn: z.string(),
   genre: z.string().min(1, "This field is required"),
   language: z.string().min(1, "This field is required"),
   edition: z.string().min(1, "This field is required"),

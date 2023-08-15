@@ -34,6 +34,8 @@ booksRoute.route("/books/:id").get((req, res, next) => {
     });
 });
 
+
+
 async function uploadFile(file, folder) {
   try {
     const storageRef = ref(storage, `${folder}/${file.originalname}`);
@@ -77,10 +79,10 @@ booksRoute.route("/add").post(
             Object.assign(req.body, downloadUrls, {
               views: 0,
               favorite: 0,
+              likes: 0,
               added_on: new Date(),
               tags: req.body.tags.split(","),
             });
-            console.log(req.body);
             Books.create(req.body)
               .then((data) => {
                 res.status(200).json(data);

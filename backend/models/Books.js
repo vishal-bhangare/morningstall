@@ -3,51 +3,20 @@ const Schema = mongoose.Schema;
 
 const Books = new Schema(
   {
-    name: {
-      type: String,
-    },
-    author: {
-      type: String,
-    },
-    publication: {
-      type: String,
-    },
-    publicationYear: {
-      type: Number,
-    },
-    isbn: {
-      type: String,
-    },
-    language: {
-      type: String,
-    },
-    genre: {
-      type: String,
-    },
-    edition: {
-      type: String,
-    },
-    pdf: {
-      type: String,
-    },
-    coverPage: {
-      type: String,
-    },
-    views: {
-      type: Number,
-    },
-    favorite: {
-      type: Number,
-    },
-    likes: {
-      type: Number,
-    },
-    rating: {
-      type: Number,
-    },
-    about: {
-      type: String,
-    },
+    name: { type: String },
+    author: { type: String },
+    publication: { type: String },
+    publicationYear: { type: Number },
+    isbn: { type: String },
+    language: { type: String },
+    genre: { type: String },
+    edition: { type: String },
+    pdf: { type: String },
+    coverPage: { type: String },
+    views: { type: Number },
+    favorite: { type: Number },
+    likes: { type: Number },
+    about: { type: String },
     tags: { type: [String] },
     added_by: { type: String },
     added_on: { type: Date },

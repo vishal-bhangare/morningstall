@@ -10,6 +10,7 @@ const User = new Schema(
     password: { type: String },
     profile_pic: { type: String },
     favorites: { type: [String] },
+    likes: { type: [String] },
     readings: { type: [{ bookId: String, pageno: Number }] },
   },
   {
