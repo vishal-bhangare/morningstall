@@ -10,7 +10,7 @@ const Home = () => {
       <header className={styles.header}>
         <Header />
       </header>
-      <aside className={styles.aside}>
+      {/* <aside className={styles.aside}>
         <form>
           <label htmlFor="sortBy">Sort By:</label>
           <select>
@@ -58,10 +58,8 @@ const Home = () => {
             ))}
           </select>
         </form>
-      </aside>
-      <section className={styles.section}>
-        <BooksGrid />
-      </section>
+      </aside> */}
+
       <footer className={styles.footer}>adsf</footer>
     </main>
   );

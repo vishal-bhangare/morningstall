@@ -17,11 +17,11 @@ body {
 
   .header {
     grid-area: header;
-    height: 64px;
+    height: 54px;
     position: sticky;
     top: 0;
     z-index: 99;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    //  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
 
   .aside {

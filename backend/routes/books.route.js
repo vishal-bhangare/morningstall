@@ -17,7 +17,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 booksRoute.route("/").get((req, res, next) => {
   let query = {};
-  s;
+
   let tags = Object.values(req.query);
   if (tags.length) query.tags = { $all: tags };
   Books.find(query)
