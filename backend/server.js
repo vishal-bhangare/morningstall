@@ -30,6 +30,9 @@ app.use(
     extended: false,
   })
 );
+app.get("/", (req, res) => {
+  res.send("Express on Vercel");
+});
 app.use("/api/books", booksRoute);
 app.use("/api/superuser", superusersRoute);
 app.use("/api/admin", adminsRoute);
