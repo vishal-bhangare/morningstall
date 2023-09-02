@@ -43,7 +43,7 @@ const BookCard = ({ book }: Props) => {
                 "fa-" + (isFavoriteHovered ? "solid" : "regular") + " fa-heart"
               }
             ></i>{" "}
-            {book.favorite}4
+            {book.favorite}
           </span>
           <span className={styles.pages}>{book?.pages} pages</span>
         </div>

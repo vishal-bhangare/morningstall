@@ -1,0 +1,26 @@
+.carousel {
+  width: 100%;
+  max-width: 100vw;
+  background-color: plum;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .navBtns {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10000;
+    i {
+      margin: 10px;
+      font-size: 1.5rem;
+    }
+  }
+  .inner {
+    white-space: nowrap;
+    transition: transfrom 0.3s;
+    box-shadow: 0 5px 15px rgba($color: #000000, $alpha: 0.05);
+  }
+}

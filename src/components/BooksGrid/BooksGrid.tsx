@@ -8,8 +8,8 @@ const BooksGrid = () => {
   useEffect(() => {
     getAllBooks()
       .then((res) => {
-        setBooksData(res.data);
         console.log(res.data);
+        setBooksData(res.data);
       })
       .catch((err) => console.log(err));
   }, []);

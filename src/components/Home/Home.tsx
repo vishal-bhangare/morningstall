@@ -3,8 +3,22 @@ import BooksGrid from "../BooksGrid/BooksGrid";
 import Header from "./Header/Header";
 import { Languages, Genres, Editions } from "../../data/BooksData";
 import { replaceAll } from "../../common/common";
+import { useEffect, useState } from "react";
+import Book from "../../entities/Book";
+import { getAllBooks, getBookInfo } from "../../services/books.service";
+import BookCard from "../BookCard/BookCard";
+import Carousel from "../Carousel/Carousel";
 
 const Home = () => {
+  const [booksData, setBooksData] = useState<Book[]>([]);
+  useEffect(() => {
+    getAllBooks()
+      .then((res) => {
+        setBooksData(res.data.slice(0, 3));
+        console.log(booksData);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <main className={styles.main}>
       <header className={styles.header}>
@@ -59,7 +73,9 @@ const Home = () => {
           </select>
         </form>
       </aside> */}
-
+      <section className={styles.section}>
+        <Carousel books={booksData} />
+      </section>
       <footer className={styles.footer}>adsf</footer>
     </main>
   );

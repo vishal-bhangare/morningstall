@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:4000/api";
+const API_URL = "https://morningstall-backend.onrender.com/api";
 import { FieldValues } from "react-hook-form";
 
 export function login(data: FieldValues) {
