@@ -12,7 +12,6 @@ const Carousel = ({ books }: Props) => {
   const updateIndex = (newIndex: number) => {
     if (newIndex < 0) newIndex = 0;
     else if (newIndex >= books.length) newIndex = books.length - 1;
-    console.log(newIndex);
     setActiveIndex(newIndex);
   };
   return (
@@ -24,11 +23,15 @@ const Carousel = ({ books }: Props) => {
           onClick={() => {
             updateIndex(activeIndex - 1);
           }}
+          style={{ color: activeIndex == 0 ? "#111111bb" : "#111111" }}
         ></i>
         <i
           className="fa-solid fa-chevron-right"
           onClick={() => {
             updateIndex(activeIndex + 1);
+          }}
+          style={{
+            color: activeIndex === books.length - 1 ? "#111111bb" : "#111111",
           }}
         ></i>
       </div>
@@ -43,8 +46,8 @@ const Carousel = ({ books }: Props) => {
       <div className={styles.indicators}>
         {books.map((item, index) => (
           <i
-            className={`fa-circle ${
-              index == activeIndex ? "fa-regular" : "fa-solid"
+            className={`fa-regular ${
+              index == activeIndex ? "fa-circle-dot" : "fa-circle"
             }`}
             key={index}
           ></i>

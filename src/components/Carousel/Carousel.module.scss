@@ -1,12 +1,12 @@
 .carousel {
   width: 100%;
   max-width: 100vw;
-  background-color: plum;
+  background-color: #11111108;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  box-shadow: 0 5px 15px rgba($color: #000000, $alpha: 0.05);
   .navBtns {
     position: absolute;
     width: 100%;
@@ -16,11 +16,21 @@
     i {
       margin: 10px;
       font-size: 1.5rem;
+      background: #11111121;
+      border-radius: 3px;
+      padding: 6px 8px;
     }
   }
   .inner {
     white-space: nowrap;
     transition: transfrom 0.3s;
-    box-shadow: 0 5px 15px rgba($color: #000000, $alpha: 0.05);
+  }
+  .indicators {
+    display: flex;
+    justify-content: center;
+    padding: 2px 0;
+    i {
+      margin: 2px;
+    }
   }
 }
