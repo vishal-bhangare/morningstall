@@ -3,7 +3,7 @@ import BooksGrid from "../BooksGrid/BooksGrid";
 import Header from "./Header/Header";
 import { Languages, Genres, Editions } from "../../data/BooksData";
 import { replaceAll } from "../../common/common";
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import Book from "../../entities/Book";
 import { getAllBooks, getBookInfo } from "../../services/books.service";
 import BookCard from "../BookCard/BookCard";
@@ -11,11 +11,15 @@ import Carousel from "../Carousel/Carousel";
 
 const Home = () => {
   const [booksData, setBooksData] = useState<Book[]>([]);
+  const [books, setBooks] = useState<Book[]>([]);
+  const imageList = document.querySelectorAll(".books .wrapper .imageList");
+  const imageListRef = createRef<HTMLDivElement>();
+
   useEffect(() => {
     getAllBooks()
       .then((res) => {
+        setBooks(res.data.slice(0, 10));
         setBooksData(res.data.slice(0, 3));
-        console.log(booksData);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -75,6 +79,53 @@ const Home = () => {
       </aside> */}
       <section className={styles.section}>
         <Carousel books={booksData} />
+        <div className={styles.recent}>
+          <div className={styles.title}>
+            Recently added
+            <div className={styles.seeAll}>
+              See All <i className="fa-regular fa-chevrons-right"></i>
+            </div>
+          </div>
+          <div className={styles.books}>
+            <div className={styles.wrapper}>
+              <i
+                className={[
+                  "fa-regular fa-chevron-left ",
+                  styles.slideBtn,
+                ].join(" ")}
+                id={styles["prev"]}
+                onClick={() => {
+                  const clientWidth = imageListRef.current?.clientWidth!;
+                  imageListRef.current?.scrollBy({
+                    left: clientWidth * -1,
+                    behavior: "smooth",
+                  });
+                }}
+              ></i>
+              <div className={styles.imageList} ref={imageListRef}>
+                {books.map((book, index) => (
+                  <div className={styles.book} key={index}>
+                    <img src={book.coverPage} alt="" />
+                  </div>
+                ))}
+              </div>
+              <i
+                className={[
+                  "fa-regular fa-chevron-right ",
+                  styles.slideBtn,
+                ].join(" ")}
+                id={styles["next"]}
+                onClick={() => {
+                  const clientWidth = imageListRef.current?.clientWidth!;
+                  imageListRef.current?.scrollBy({
+                    left: clientWidth * 1,
+                    behavior: "smooth",
+                  });
+                }}
+              ></i>
+            </div>
+          </div>
+        </div>
       </section>
       <footer className={styles.footer}>adsf</footer>
     </main>
