@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Book from "../../entities/Book";
 import CarouselItem from "./CarouselItem/CarouselItem";
 import styles from "./Carousel.module.scss";
@@ -9,11 +9,20 @@ interface Props {
 
 const Carousel = ({ books }: Props) => {
   const [activeIndex, setActiveIndex] = useState(0);
+
   const updateIndex = (newIndex: number) => {
     if (newIndex < 0) newIndex = 0;
     else if (newIndex >= books.length) newIndex = books.length - 1;
     setActiveIndex(newIndex);
   };
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveIndex((activeIndex + 1) % 3);
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [activeIndex]);
   return (
     <div className={styles.carousel}>
       <div className={styles.navBtns}>
@@ -40,7 +49,7 @@ const Carousel = ({ books }: Props) => {
         className={styles.inner}
       >
         {books.map((book, index) => (
-          <CarouselItem book={book} />
+          <CarouselItem book={book} key={index} />
         ))}
       </div>
       <div className={styles.indicators}>

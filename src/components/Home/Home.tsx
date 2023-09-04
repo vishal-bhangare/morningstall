@@ -79,7 +79,7 @@ const Home = () => {
       </aside> */}
       <section className={styles.section}>
         <Carousel books={booksData} />
-        <div className={styles.recent}>
+        <div className={[styles.recent, styles.imageSlider].join(" ")}>
           <div className={styles.title}>
             Recently added
             <div className={styles.seeAll}>
@@ -123,6 +123,58 @@ const Home = () => {
                   });
                 }}
               ></i>
+            </div>
+          </div>
+        </div>
+        <div className={[styles.MostViewed, styles.imageSlider].join(" ")}>
+          <div className={styles.title}>
+            Most Viewed
+            <div className={styles.seeAll}>
+              See All <i className="fa-regular fa-chevrons-right"></i>
+            </div>
+          </div>
+          <div className={styles.books}>
+            <div className={styles.wrapper}>
+              <i
+                className={[
+                  "fa-regular fa-chevron-left ",
+                  styles.slideBtn,
+                ].join(" ")}
+                id={styles["prev"]}
+                onClick={() => {
+                  const clientWidth = imageListRef.current?.clientWidth!;
+                  imageListRef.current?.scrollBy({
+                    left: clientWidth * -1,
+                    behavior: "smooth",
+                  });
+                }}
+              ></i>
+              <div className={styles.imageList} ref={imageListRef}>
+                {books.map((book, index) => (
+                  <div className={styles.book} key={index}>
+                    <img src={book.coverPage} alt="" />
+                  </div>
+                ))}
+              </div>
+              <i
+                className={[
+                  "fa-regular fa-chevron-right ",
+                  styles.slideBtn,
+                ].join(" ")}
+                id={styles["next"]}
+                onClick={() => {
+                  const clientWidth = imageListRef.current?.clientWidth!;
+                  imageListRef.current?.scrollBy({
+                    left: clientWidth * 1,
+                    behavior: "smooth",
+                  });
+                }}
+              ></i>
+            </div>
+            <div className={styles.sliderScrollbar}>
+              <div className={styles.scrollbarTrack}>
+                <div className={styles.scrollbarThumb}></div>
+              </div>
             </div>
           </div>
         </div>

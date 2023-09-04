@@ -12,7 +12,9 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    z-index: 10000;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.3s;
     i {
       margin: 10px;
       font-size: 1.5rem;
@@ -21,9 +23,12 @@
       padding: 6px 8px;
     }
   }
+  .navBtns:hover {
+    opacity: 1;
+  }
   .inner {
     white-space: nowrap;
-    transition: transfrom 0.3s;
+    transition: all 0.5s;
   }
   .indicators {
     display: flex;
