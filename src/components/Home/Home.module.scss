@@ -132,56 +132,7 @@ body {
               }
             }
           }
-          // .imageList::sc {
-          //   width: 2em;
-          //   background-color: aqua;
-          // }
-          // .imageList::-webkit-scrollbar-track {
-          //   background-color: aqua;
-          //   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-          // }
-          // .imagelist::-webkit-scrollbar-thumb {
-          //   background-color: red;
-          //   outline: 1px solid rgb(0, 126, 253);
-          // }
         }
-        // .sliderScrollbar {
-        //   height: 24px;
-        //   width: 100%;
-        //   display: flex;
-        //   align-items: center;
-
-        //   .scrollbarTrack {
-        //     height: 2px;
-        //     width: 100%;
-        //     background: #ccc;
-        //     position: relative;
-        //     .scrollbarThumb {
-        //       position: absolute;
-        //       height: 100%;
-        //       width: 50%;
-        //       background: #000;
-        //       border-radius: inherit;
-        //       cursor: grab;
-        //     }
-        //     .scrollbarThumb:after {
-        //       content: "";
-        //       position: absolute;
-        //       left: 0;
-        //       right: 0;
-        //       top: -10px;
-        //       bottom: -10px;
-        //     }
-        //     .scrollbarThumb:active {
-        //       cursor: grabbing;
-        //       height: 8px;
-        //       top: -2px;
-        //     }
-        //   }
-        // }
-        // .sliderScrollbar:hover .scrollbarTrack {
-        //   height: 4px;
-        // }
       }
     }
   }
