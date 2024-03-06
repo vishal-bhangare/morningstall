@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { getBookInfo } from "../../services/books.service";
+
 import Header from "../Home/Header/Header";
 import Book from "../../entities/Book";
 import styles from "./BookDetail.module.scss";
@@ -8,9 +8,9 @@ import styles from "./BookDetail.module.scss";
 const BookDetail = () => {
   const { id } = useParams();
   const [bookdata, setBookdata] = useState<Book>();
-  getBookInfo(id!)
-    .then((res) => setBookdata(res.data))
-    .catch((err) => console.error(err));
+  // getBookInfo(id!)
+  //   .then((res) => setBookdata(res.data))
+  //   .catch((err) => console.error(err));
   return (
     <>
       <Header />

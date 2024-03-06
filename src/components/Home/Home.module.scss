@@ -2,145 +2,65 @@
 body {
   background: $secondary !important;
 }
-.main {
-  display: grid;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+.home {
   width: 100%;
   height: 100%;
+  display: flex;
   min-height: 100vh;
-  grid-template:
-    "header header " auto
-    "aside section " 1fr
-    "footer footer" auto /
-    auto 1fr;
-
+  flex-wrap: wrap;
   .header {
-    grid-area: header;
     height: 54px;
     position: sticky;
     top: 0;
     z-index: 99;
     //  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
-
-  .aside {
-    grid-area: aside;
-    min-width: 200px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    form {
-      display: flex;
-      flex-direction: column;
-      padding: 1rem 0.5rem;
-      > label {
-        font-size: 1.1rem;
-        padding-top: 0.5rem;
-      }
-      select {
-        color: #111;
-        background: #fff;
-        border: 1px solid #1115;
-        outline: none;
-        border-radius: 6px;
-        padding: 0.2rem 0.4rem;
-        font-size: 1rem;
-      }
-      select:hover {
-        border: 1px solid #111a;
-      }
-      div#languages {
-        label {
-          display: block;
+  main {
+    display: flex;
+    position: relative;
+    width: 100%;
+    aside {
+      min-width: 260px;
+      form {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 0.5rem;
+        > label {
+          font-size: 1.1rem;
+          padding-top: 0.5rem;
+        }
+        select {
+          color: #111;
+          background: #fff;
+          border: 1px solid #1115;
+          outline: none;
+          border-radius: 6px;
+          padding: 0.2rem 0.4rem;
+          font-size: 1rem;
+        }
+        select:hover {
+          border: 1px solid #111a;
+        }
+        div#languages {
+          label {
+            display: block;
+          }
         }
       }
     }
-  }
-  .section {
-    grid-area: section;
-
-    height: fit-content;
-    margin: auto;
-    width: 100%;
-    .imageSlider {
-      overflow: hidden;
-      .title {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0.2rem 0.5rem;
-        max-width: calc(100vw - 1rem);
-        font-size: 1.3rem;
-        font-weight: 500;
-
-        .seeAll {
-          font-size: 1rem;
-          font-weight: 400;
-        }
-      }
-      .books {
-        max-width: 100vw;
-        width: calc(100%);
-        height: fit-content;
-
-        .wrapper {
-          position: relative;
-          margin-bottom: 20px;
-          .slideBtn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #f8f8f8;
-            color: #1f1f1f;
-            margin: 0 4px;
-            padding: 2rem 1rem;
-            font-size: 1.5rem;
-            cursor: pointer;
-            border-radius: 3px;
-            opacity: 0;
-            transition: opacity 0.3s;
-            font-weight: 700;
-          }
-          .slideBtn:hover {
-            opacity: 1;
-          }
-          .slideBtn#prev {
-            left: 0;
-          }
-          .slideBtn#next {
-            right: 0;
-          }
-          .imageList {
-            display: grid;
-            grid-template-columns: repeat(10, 1fr);
-            font-size: 0;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scrollbar-width: thin;
-            padding: 0 0.1rem;
-            scroll-behavior: smooth;
-
-            .book {
-              width: 200px;
-              height: 300px;
-              object-fit: cover;
-              border-radius: 5px;
-              overflow: hidden;
-              padding: 0.4rem;
-              img {
-                width: 100%;
-                height: 100%;
-              }
-            }
-          }
-        }
-      }
+    section {
+      position: relative;
+      width: calc(100% - 260px);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
     }
   }
   .footer {
-    grid-area: footer;
+    width: 100%;
   }
 }
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .aside {
     display: none;
   }

@@ -5,9 +5,9 @@ export interface FetchResponse<T> {
   next: string | null;
   results: T[];
 }
-
+const API_URL = "http://localhost:4000/api";
 const axiosInstance = axios.create({
-  baseURL: "API_URL",
+  baseURL: API_URL,
   headers: {},
 });
 
@@ -31,4 +31,4 @@ class APIClient<T> {
   };
 }
 
-export default APIClient;
+export default axiosInstance;

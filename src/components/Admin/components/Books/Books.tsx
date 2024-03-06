@@ -4,7 +4,7 @@ import { any, set, z } from "zod";
 import styles from "./Books.module.scss";
 import { useEffect, useState } from "react";
 import { Languages, Genres, Editions } from "../../../../data/BooksData";
-import { addBook, getAllBooks } from "../../../../services/books.service";
+
 import PdfViewer from "../../../PdfViewer/PdfViewer";
 import Book from "../../../../entities/Book";
 import { replaceAll } from "../../../../common/common";
@@ -52,11 +52,11 @@ const Books = () => {
     return pdfPages;
   };
   const loadBooksData = () => {
-    getAllBooks()
-      .then((res) => {
-        setBooksData(res.data);
-      })
-      .catch((err) => console.error(err));
+    // getAllBooks()
+    //   .then((res) => {
+    //     setBooksData(res.data);
+    //   })
+    //   .catch((err) => console.error(err));
   };
   useEffect(() => {
     loadBooksData();
@@ -100,16 +100,16 @@ const Books = () => {
     }
     setStatusMessage("Upload data...", "file");
     console.log(data);
-    addBook(data)
-      .then((res) => {
-        setStatusMessage("Data uploaded.");
-        reset();
+    // addBook(data)
+    //   .then((res) => {
+    //     setStatusMessage("Data uploaded.");
+    //     reset();
 
-        loadBooksData();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //     loadBooksData();
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (

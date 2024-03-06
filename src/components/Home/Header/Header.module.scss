@@ -1,6 +1,7 @@
 @import "../../../common/common.scss";
 
 .container {
+  grid-area: header;
   height: calc(100% - 10px);
   width: calc(100% - 20px);
   position: relative;
@@ -11,7 +12,6 @@
   align-items: center;
   // background: #f8d8d8;
   border-bottom: 1px solid $neutral_400;
-  max-width: calc(100vw - 20px);
   button {
     background: #111;
     outline: none;
