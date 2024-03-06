@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
   headers: {},
 });
 
-class BooksClient<T> {
+class BooksClient {
   private endpoint: string;
   constructor(endpoint: string) {
     this.endpoint = endpoint;
@@ -22,11 +22,13 @@ class BooksClient<T> {
       },
     });
   };
-  getAllBooks = () => {
-    return axiosInstance.get<T>(`${this.endpoint}`).then((res) => res.data);
+  getAllBooks = (page: number) => {
+    return axiosInstance
+      .get(`${this.endpoint}/${page}`)
+      .then((res) => res.data);
   };
-  getBookInfo = (id: string) => {
-    return axiosInstance.get(`${API_URL}/${id}`);
+  getBook = (id: string) => {
+    return axiosInstance.get(`${this.endpoint}/${id}`).then((res) => res.data);
   };
 }
 

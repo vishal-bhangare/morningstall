@@ -1,52 +1,16 @@
-import { useState } from "react";
+import React from "react";
 import Book from "../../entities/Book";
 import styles from "./BookCard.module.scss";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-interface Props {
-  book: Book;
-}
-const BookCard = ({ book }: Props) => {
-  const [isFavoriteHovered, setFavoriteHovered] = useState(false);
+const BookCard = ({ book }: { book: Book }) => {
+  const navigator = useNavigate();
   return (
-    <div className={styles.card}>
-      <div
-        className={styles.coverPage}
-        // style={{
-        //   backgroundImage: "url(" + book?.coverPage + ")",
-        //   backgroundSize: "cover",
-        //   backgroundRepeat: "no-repeat",
-        //   backgroundPosition: "center",
-        // }}
-      >
-        <img src={book.coverPage} />
-      </div>
+    <div className={styles.book} onClick={() => navigator(`/book/${book._id}`)}>
+      <img src={book.coverPage} alt="" />
       <div className={styles.info}>
-        <Link to={"/books/" + book._id} className={styles.name}>
-          {book.name}
-        </Link>{" "}
-        <span className={styles.author}>{book.author}</span>
-        <span className={styles.about}>{book.about?.slice(0, 120)}</span>
-        <div className={styles.bottom}>
-          <span className={styles.views}>{book.views} views</span>
-          <span
-            className={styles.favorite}
-            onMouseOver={() => {
-              setFavoriteHovered(true);
-            }}
-            onMouseOut={() => {
-              setFavoriteHovered(false);
-            }}
-          >
-            <i
-              className={
-                "fa-" + (isFavoriteHovered ? "solid" : "regular") + " fa-heart"
-              }
-            ></i>{" "}
-            {book.favorite}
-          </span>
-          <span className={styles.pages}>{book?.pages} pages</span>
-        </div>
+        <span>{book.name}</span>
+        <span className={styles.author}> by {book.author}</span>
       </div>
     </div>
   );

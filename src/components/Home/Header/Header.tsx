@@ -3,6 +3,7 @@ import styles from "./Header.module.scss";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import Logo from "../../Logo/Logo";
+import Button from "../../Utils/Button/Button";
 const Header = () => {
   const [isLoggedIn, setLoggedIn] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -100,9 +101,9 @@ const Header = () => {
           ></i>
         )} */}
 
-        <button>
+        <Button size="md" mode="dark">
           <Link to="/login">Signin</Link>
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -1,52 +1,22 @@
-@import "../../common/colors.scss";
-
-.card {
-  flex: 1 1 calc(33% - 22px);
+.book {
+  width: 150px;
   display: flex;
-  background: #fff;
-  border-radius: 4px;
-  border: 1px solid #d0cdb5;
-  height: 250px;
-  overflow: clip;
-  gap: 10px;
-  margin: 0.6rem;
-  min-width: 400px;
-  max-width: 500px;
-
-  .coverPage {
-    height: 100%;
-
-    img {
-      height: 100%;
-      max-width: 165px;
-    }
+  flex-direction: column;
+  object-fit: cover;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 0.4rem;
+  img {
+    width: 150px;
+    height: 225px;
   }
   .info {
-    padding: 10px;
+    font-size: 0.7rem;
     display: flex;
     flex-direction: column;
-    position: relative;
-    > span {
-      display: block;
-    }
-    .name {
-      font-size: 1.3rem;
-      font-weight: 500;
-      line-height: 120%;
-      word-spacing: -2%;
-    }
-    .about {
-      color: $neutral_800;
-      line-height: 150%;
-      word-spacing: 5%;
-    }
-    .bottom {
-      display: flex;
-      justify-content: space-between;
-      margin-top: auto;
-      .favorite {
-        color: #e73f4b;
-      }
+    font-weight: 400;
+    .author {
+      font-size: 0.6rem;
     }
   }
 }

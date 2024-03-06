@@ -15,18 +15,29 @@ const storage = getStorage();
 
 const upload = multer({ storage: multer.memoryStorage() });
 
-booksRoute.route("/").get((req, res, next) => {
+booksRoute.route("/:page").get((req, res, next) => {
   let query = {};
-
+  const page = req.params.page;
+  const limit = 10;
   let tags = Object.values(req.query);
   if (tags.length) query.tags = { $all: tags };
-  Books.find(query)
-    .then((data) => {
-      res.status(200).json(data);
-    })
-    .catch((err) => {
-      return next(err);
-    });
+
+  Books.countDocuments({}).then((total) => {
+    const totalPages = Math.ceil(total / limit);
+
+    Books.find({}, {}, { skip: limit * page, limit: limit })
+      .then((data) => {
+        res.status(200).json({
+          status: 1,
+          books: data,
+          totalPages: totalPages,
+          hasMore: page + 1 < totalPages,
+        });
+      })
+      .catch((err) => {
+        return next(err);
+      });
+  });
 });
 booksRoute.route("/search").get((req, res, next) => {
   const query = {
@@ -46,7 +57,7 @@ booksRoute.route("/search").get((req, res, next) => {
     });
 });
 
-booksRoute.route("/:id").get((req, res, next) => {
+booksRoute.route("/book/:id").get((req, res, next) => {
   Books.findById(req.params.id)
     .then((data) => {
       res.status(200).json(data);

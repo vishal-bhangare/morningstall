@@ -1,6 +1,8 @@
 import React, { createRef } from "react";
 import Book from "../../entities/Book";
 import styles from "./BooksSlider.module.scss";
+import { useNavigate } from "react-router-dom";
+import BookCard from "../BookCard/BookCard";
 interface Props {
   title: string;
   books: Book[];
@@ -8,6 +10,7 @@ interface Props {
 }
 const BooksSlider = ({ title, books }: Props) => {
   const imageListRef = createRef<HTMLDivElement>();
+
   return (
     <div className={[styles.recent, styles.imageSlider].join(" ")}>
       <div className={styles.title}>
@@ -31,9 +34,7 @@ const BooksSlider = ({ title, books }: Props) => {
         <div className={styles.wrapper} ref={imageListRef}>
           <div className={styles.imageList}>
             {books!.map((book, index) => (
-              <div className={styles.book} key={index}>
-                <img src={book.coverPage} alt="" />
-              </div>
+              <BookCard book={book} key={index} />
             ))}
           </div>
         </div>

@@ -12,19 +12,8 @@
   align-items: center;
   // background: #f8d8d8;
   border-bottom: 1px solid $neutral_400;
-  button {
-    background: #111;
-    outline: none;
-    border: none;
-    padding: 0.3rem 0.6rem;
-    border-radius: 0;
-    transition: all 0.3s;
-    border-radius: 2px;
-  }
   button:hover {
-    outline: none;
-    border: none;
-    border-radius: 6px;
+    border-radius: 7px;
   }
 
   .start {

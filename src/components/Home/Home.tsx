@@ -1,22 +1,17 @@
-import styles from "./Home.module.scss";
-import BooksGrid from "../BooksGrid/BooksGrid";
-import Header from "./Header/Header";
-import { Languages, Genres, Editions } from "../../data/BooksData";
+import { useEffect } from "react";
 import { replaceAll } from "../../common/common";
-import { createRef, useEffect, useState } from "react";
+import { Editions, Genres, Languages } from "../../data/BooksData";
 import Book from "../../entities/Book";
+import Header from "./Header/Header";
+import styles from "./Home.module.scss";
 
-import BookCard from "../BookCard/BookCard";
-import Carousel from "../Carousel/Carousel";
 import useAllBooks from "../../hooks/queries/useAllBooks";
 import BooksSlider from "../BooksSlider/BooksSlider";
+import Carousel from "../Carousel/Carousel";
 
 const Home = () => {
-  const [booksData, setBooksData] = useState<Book[]>([]);
-  // const [books, setBooks] = useState<Book[]>([]);
-  const { data: books, isLoading } = useAllBooks();
-  const imageList = document.querySelectorAll(".books .wrapper .imageList");
-
+  const { data, isLoading } = useAllBooks(0);
+  const books: Book[] = data?.books;
   useEffect(() => {
     // getAllBooks()
     //   .then((res) => {

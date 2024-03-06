@@ -1,14 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
 import ms from "ms";
 import BooksClient from "../../services/books.service";
-import Book from "../../entities/Book";
 
-const booksClient = new BooksClient<Book[]>("/");
+const booksClient = new BooksClient("");
 
-const useAllBooks = () =>
+const useAllBooks = (page: number) =>
   useQuery({
     queryKey: ["books"],
-    queryFn: () => booksClient.getAllBooks(),
+    queryFn: () => booksClient.getAllBooks(page),
     staleTime: ms("12h"),
   });
 
