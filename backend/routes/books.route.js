@@ -18,7 +18,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 booksRoute.route("/:page").get((req, res, next) => {
   let query = {};
   const page = req.params.page;
-  const limit = 10;
+  const limit = req.query.limit;
   let tags = Object.values(req.query);
   if (tags.length) query.tags = { $all: tags };
 
@@ -140,9 +140,5 @@ const getDateDiff = (diff) => {
     return Math.floor(diffsec / 2592000) + " months";
   else if (diffsec >= 31536000) return Math.floor(diffsec / 31536000) + " yrs";
 };
-// const today = new Date("2023-08-08T05:20:02.144Z");
-// const prev = new Date("2023-07-09T05:20:02.144Z");
-// const diff = today - prev;
 
-// console.log(getDateDiff(diff));
 module.exports = booksRoute;

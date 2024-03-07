@@ -1,0 +1,62 @@
+@import "../../common/common.scss";
+.container {
+  display: flex;
+  position: relative;
+  width: 100%;
+  .aside {
+    max-width: 260px;
+    form {
+      display: flex;
+      flex-direction: column;
+      padding: 1rem 0.5rem;
+      > label {
+        font-size: 1.1rem;
+        padding-top: 0.5rem;
+      }
+      select {
+        color: #111;
+        background: #fff;
+        border: 1px solid #1115;
+        outline: none;
+        border-radius: 6px;
+        padding: 0.2rem 0.4rem;
+        font-size: 1rem;
+      }
+      select:hover {
+        border: 1px solid #111a;
+      }
+      div#languages {
+        label {
+          display: block;
+        }
+      }
+    }
+  }
+  .booksWrapper {
+    position: relative;
+    width: calc(100% - 260px);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .books {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      justify-items: center;
+    }
+    .pagination {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 2rem;
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .aside {
+    display: none;
+  }
+}

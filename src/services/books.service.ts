@@ -22,9 +22,9 @@ class BooksClient {
       },
     });
   };
-  getAllBooks = (page: number) => {
+  getAllBooks = (page: number, limit: number = 10) => {
     return axiosInstance
-      .get(`${this.endpoint}/${page}`)
+      .get(`${this.endpoint}/${page}?limit=${limit}`)
       .then((res) => res.data);
   };
   getBook = (id: string) => {

@@ -4,10 +4,10 @@ import BooksClient from "../../services/books.service";
 
 const booksClient = new BooksClient("");
 
-const useAllBooks = (page: number) =>
+const useAllBooks = (page: number, limit: number = 10) =>
   useQuery({
-    queryKey: ["books"],
-    queryFn: () => booksClient.getAllBooks(page),
+    queryKey: ["books", page],
+    queryFn: () => booksClient.getAllBooks(page, limit),
     staleTime: ms("12h"),
   });
 

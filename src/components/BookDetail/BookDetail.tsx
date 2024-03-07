@@ -29,11 +29,10 @@ const BookDetail = () => {
         <section className={styles.detailsWrapper}>
           {!isLoading && (
             <>
-              <img
-                src={bookdata?.coverPage}
-                alt=""
-                className={styles.coverpage}
-              />
+              <div className={styles.coverpage}>
+                {" "}
+                <img src={bookdata?.coverPage} alt="" />
+              </div>
               <div className={styles.details}>
                 <span className={styles.name}>{bookdata?.name}</span>
                 <div className={styles.other}>

@@ -9,10 +9,15 @@
     border-radius: 5px;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
-    img.coverpage {
-      height: 100%;
+    .coverpage {
+      flex-shrink: 0;
+      height: 300px;
       border-radius: 3px;
       width: 200px;
+      img {
+        height: 100%;
+        width: 100%;
+      }
     }
     .details {
       display: flex;
