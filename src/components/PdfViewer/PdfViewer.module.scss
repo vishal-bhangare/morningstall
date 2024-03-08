@@ -1,38 +1,43 @@
-.pdfBox {
-  position: relative;
-  width: 100%;
-  canvas {
-    width: 100% !important;
-    height: 100% !important;
+.modal,
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  z-index: 100;
+  .overlay {
+    background: rgba(49, 49, 49, 0.8);
+    pointer-events: none;
   }
-
-  .actionBtns {
+  .content {
+    z-index: 101;
     position: absolute;
-    bottom: 0;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    margin-bottom: 2rem;
+    transform: translate(-50%, -50%);
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 3px;
+    width: 100%;
+    min-height: 200px;
+    max-height: 90%;
+    max-width: 600px;
+    overflow: auto;
+    .pdf {
+      canvas {
+        width: 100% !important;
+        height: 100% !important;
+      }
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-    opacity: 0;
-    transition: opacity 0.2s;
-    button {
-      border-radius: 6px !important;
-      padding: 0.2em 0.6em !important;
-      background: #f2f2f2;
-      color: #000;
-      margin: 3px;
-      outline: none;
-      border: none;
-      transition: background 0.3s;
-      i {
-        font-size: 1.4rem;
+        gap: 10px;
       }
     }
-    button:hover {
-      background: #e2e2e2;
-    }
-  }
-  .actionBtns:hover {
-    opacity: 1;
   }
 }

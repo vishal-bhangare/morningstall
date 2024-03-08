@@ -8,6 +8,9 @@ import { Languages, Genres, Editions } from "../../../../data/BooksData";
 import PdfViewer from "../../../PdfViewer/PdfViewer";
 import Book from "../../../../entities/Book";
 import { replaceAll } from "../../../../common/common";
+import useAllBooks from "../../../../hooks/queries/useAllBooks";
+import useAddBook from "../../../../hooks/mutations/useAddBook";
+import IconButton from "../../../Utils/IconButton/IconButton";
 
 const schema = z.object({
   name: z.string().min(3),
@@ -36,12 +39,14 @@ const Books = () => {
     reset,
     formState: { errors },
   } = useForm<FormData>({ resolver: zodResolver(schema) });
+
   const [modal, setModal] = useState(false);
-  const [booksData, setBooksData] = useState<Book[]>([]);
   const [curUrl, setCurUrl] = useState("");
   const [pdfModal, setPdfModal] = useState(false);
   const [pdfPages, setPdfPages] = useState(0);
 
+  const { data, isLoading, refetch } = useAllBooks(0, 0);
+  const addBookMutation = useAddBook();
   const pagesInPdf = (event: any) => {
     const reader = new FileReader();
     reader.readAsBinaryString(event.target.files[0]);
@@ -51,16 +56,6 @@ const Books = () => {
     };
     return pdfPages;
   };
-  const loadBooksData = () => {
-    // getAllBooks()
-    //   .then((res) => {
-    //     setBooksData(res.data);
-    //   })
-    //   .catch((err) => console.error(err));
-  };
-  useEffect(() => {
-    loadBooksData();
-  }, [statusMessage]);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -99,18 +94,19 @@ const Books = () => {
       data.append("added_by", user);
     }
     setStatusMessage("Upload data...", "file");
-    console.log(data);
-    // addBook(data)
-    //   .then((res) => {
-    //     setStatusMessage("Data uploaded.");
-    //     reset();
-
-    //     loadBooksData();
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    addBookMutation.mutate(data, {
+      onSuccess: (data: any, variables: any, context: any) => {
+        setStatusMessage("Data uploaded.");
+        refetch();
+        reset();
+      },
+      onError: (error: any, variables: any, context: any) => {
+        console.log(error);
+      },
+    });
   };
+
+  useEffect(() => {}, [statusMessage, data]);
 
   return (
     <>
@@ -128,61 +124,47 @@ const Books = () => {
               </tr>
             </thead>
             <tbody>
-              {booksData.length == 0 ? (
+              {!isLoading && data?.books.length == 0 ? (
                 <tr>
                   <td colSpan={4}>No data available</td>
                 </tr>
               ) : null}
-              {booksData?.map((item, index) => {
-                return (
-                  <tr key={item["_id"]}>
-                    <td>{index + 1}</td>
-                    <td>{item["name"]}</td>
-                    <td>{item["author"]}</td>
-                    <td>{item["publicationYear"]}</td>
-                    <td>
-                      <button
-                        onClick={() => {
-                          setCurUrl(item["pdf"]);
-                          setPdfModal(true);
-                        }}
-                      >
-                        view
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+              {!isLoading &&
+                data?.books?.map((book: Book, i: number) => {
+                  return (
+                    <tr key={book["_id"]}>
+                      <td>{i + 1}</td>
+                      <td>{book["name"]}</td>
+                      <td>{book["author"]}</td>
+                      <td>{book["publicationYear"]}</td>
+                      <td>
+                        <button
+                          onClick={() => {
+                            setCurUrl(() => book["pdf"]);
+                            setPdfModal(() => true);
+                          }}
+                        >
+                          view
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
-        {pdfModal && (
-          <div className={styles.modal}>
-            <div onClick={toggleModal} className={styles.overlay}></div>
-            <div className={styles.modalContent}>
-              <i
-                className={"fa-solid fa-xmark " + styles.pdfModalClose}
-                onClick={() => setPdfModal(false)}
-              ></i>
-
-              <PdfViewer url={curUrl} />
-            </div>
-          </div>
+        {!!curUrl && (
+          <PdfViewer
+            url={curUrl}
+            closeModal={() => {
+              setCurUrl(() => "");
+            }}
+          />
         )}
 
-        {/* <PdfViewer url={curUrl} /> */}
         {statusMessage && (
           <div className={styles.statusMessage}>{statusMessage}</div>
         )}
-        <i
-          onClick={toggleModal}
-          className={
-            "fa-sharp fa-solid fa-plus " +
-            styles.btnModal +
-            " " +
-            (modal ? styles.closeModal : null)
-          }
-        ></i>
 
         {modal && (
           <div className={styles.modal}>
@@ -413,6 +395,19 @@ const Books = () => {
             </div>
           </div>
         )}
+        <IconButton
+          name="plus"
+          onClick={toggleModal}
+          style={{
+            fontSize: "1.5rem",
+            background: "#0d6efd",
+            color: "#fff",
+            position: "fixed",
+            right: 10,
+            bottom: 10,
+          }}
+          rounded
+        />
       </div>
     </>
   );

@@ -25,7 +25,8 @@ booksRoute.route("/:page").get((req, res, next) => {
   Books.countDocuments({}).then((total) => {
     const totalPages = Math.ceil(total / limit);
 
-    Books.find({}, {}, { skip: limit * page, limit: limit })
+    const options = limit !== -1 ? { skip: limit * page, limit: limit } : {};
+    Books.find({}, {}, options)
       .then((data) => {
         res.status(200).json({
           status: 1,
@@ -89,7 +90,7 @@ async function uploadFile(file, folder) {
 }
 downloadUrls = { pdf: "", coverPage: "" };
 
-booksRoute.route("/add").post(
+booksRoute.route("/").post(
   upload.fields([
     {
       name: "pdf",

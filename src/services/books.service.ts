@@ -16,7 +16,7 @@ class BooksClient {
     this.endpoint = endpoint;
   }
   addBook = (data: FormData) => {
-    return axiosInstance.post(`${API_URL}/add`, data, {
+    return axiosInstance.post(`${this.endpoint}`, data, {
       headers: {
         "Content-Type": "multipart/formdata",
       },

@@ -1,56 +1,71 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { pdfjs, Document, Page } from "react-pdf";
 import styles from "./PdfViewer.module.scss";
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+import IconButton from "../Utils/IconButton/IconButton";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 interface Props {
   url: string;
+  closeModal: () => void;
 }
-const url =
-  "https://firebasestorage.googleapis.com/v0/b/YourPROJECT_ID.appspot.com/o/4.40-TYBSC-Syllabus-Computer-Science-2018-19.pdf?alt=media&token=be6cb733-98db-4d34-9b6e-592a070f2686";
 
-const PdfViewer = ({ url }: Props) => {
+const PdfViewer = ({ url, closeModal }: Props) => {
   const [numPages, setNumPages] = useState<any>(null);
   const [pageNumber, setPageNumber] = useState(1);
   function onDocumentLoadSuccess({ numPages }: { numPages: number }) {
     setNumPages(numPages);
   }
+  useEffect(() => {}, []);
   return (
-    <>
-      <Document
-        file={url}
-        onLoadSuccess={onDocumentLoadSuccess}
-        className={styles.pdfBox}
-      >
-        <Page
-          pageNumber={pageNumber}
-          renderAnnotationLayer={false}
-          renderTextLayer={false}
+    <div className={styles.modal}>
+      <div className={styles.overlay}></div>
+      <div className={styles.content}>
+        <IconButton
+          name="xmark"
+          onClick={closeModal}
+          style={{
+            zIndex: "100",
+            background: "transparent",
+            position: "absolute",
+            top: 0,
+            right: 0,
+          }}
+          rounded
         />
-        <div className={styles.actionBtns}>
-          <button disabled={pageNumber == 1 ? true : false}>
-            <i
-              className="fa-regular fa-chevron-left"
+
+        <Document
+          file={url}
+          onLoadSuccess={onDocumentLoadSuccess}
+          className={styles.pdf}
+        >
+          <Page
+            pageNumber={pageNumber}
+            renderAnnotationLayer={false}
+            renderTextLayer={false}
+          />
+          <div className={styles.pagination}>
+            <IconButton
+              name="chevron-left"
+              disabled={pageNumber == 1 ? true : false}
               onClick={() => {
                 setPageNumber(pageNumber - 1);
               }}
-            ></i>
-          </button>
-          <button disabled={pageNumber == numPages ? true : false}>
-            {" "}
-            <i
-              className="fa-regular fa-chevron-right"
+            />
+            <p>
+              Page {pageNumber} of {numPages}
+            </p>
+            <IconButton
+              name="chevron-right"
+              disabled={pageNumber == numPages ? true : false}
               onClick={() => {
                 setPageNumber(pageNumber + 1);
               }}
-            ></i>
-          </button>
-        </div>
-      </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
-    </>
+            />
+          </div>
+        </Document>
+      </div>
+    </div>
   );
 };
 
