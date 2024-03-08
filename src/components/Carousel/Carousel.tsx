@@ -26,7 +26,6 @@ const Carousel = ({ books }: Props) => {
   return (
     <div className={styles.carousel}>
       <div className={styles.navBtns}>
-        {" "}
         <i
           className="fa-solid fa-chevron-left"
           onClick={() => {

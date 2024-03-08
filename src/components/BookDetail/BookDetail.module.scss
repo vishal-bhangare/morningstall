@@ -1,73 +1,79 @@
 @import "../../common/colors.scss";
 .content {
   padding: 0.7rem;
-  .detailsWrapper {
-    display: flex;
-    height: 300px;
-    gap: 1rem;
-    border: 1px solid $neutral_400;
-    border-radius: 5px;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    .coverpage {
-      flex-shrink: 0;
-      height: 300px;
-      border-radius: 3px;
-      width: 200px;
-      img {
-        height: 100%;
-        width: 100%;
-      }
-    }
-    .details {
+  display: flex;
+  justify-content: center;
+  .wrapper {
+    width: 100%;
+    max-width: 900px;
+    .detailsWrapper {
       display: flex;
-      flex-direction: column;
-      font-size: 0.9rem;
-      .name {
-        font-size: 1.2rem;
-        font-weight: 600;
-      }
-      .other {
-        display: grid;
-        grid-template-columns: auto auto;
-        grid-column-gap: 1rem;
-        .key {
-          font-weight: 500;
+      height: 300px;
+      gap: 1rem;
+      border: 1px solid $neutral_400;
+      border-radius: 5px;
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      .coverpage {
+        flex-shrink: 0;
+        height: 300px;
+        border-radius: 3px;
+        width: 200px;
+        img {
+          height: 100%;
+          width: 100%;
         }
       }
-      .actionBtns {
-        margin-top: auto;
+      .details {
         display: flex;
-        gap: 10px;
+        flex-direction: column;
+        font-size: 0.9rem;
+        .name {
+          font-size: 1.2rem;
+          font-weight: 600;
+        }
+        .other {
+          display: grid;
+          grid-template-columns: auto auto;
+          grid-column-gap: 1rem;
+          .key {
+            font-weight: 500;
+          }
+        }
+        .actionBtns {
+          margin-top: auto;
+          display: flex;
+          gap: 10px;
+        }
       }
     }
-  }
-  .aboutWrapper {
-    padding: 0.5rem;
-    border: 1px solid $neutral_400;
-    margin-bottom: 1rem;
-    .title {
-      display: block;
-      font-size: 1.1rem;
+    .aboutWrapper {
+      padding: 0.5rem;
+      border: 1px solid $neutral_400;
+      margin-bottom: 1rem;
+      .title {
+        display: block;
+        font-size: 1.1rem;
+      }
+      .about {
+        text-align: justify;
+        font-size: 0.9rem;
+      }
     }
-    .about {
-      text-align: justify;
-      font-size: 0.9rem;
-    }
-  }
-  .reviews {
-    position: relative;
-    width: 100%;
-    height: 200px;
-    background: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    .title {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-size: 1.2rem;
+    .reviews {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: #eee;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .title {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 1.2rem;
+      }
     }
   }
 }

@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import Book from "../../entities/Book";
 import BooksClient from "../../services/books.service";
 
 const booksClient = new BooksClient("/");

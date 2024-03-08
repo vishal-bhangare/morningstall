@@ -62,7 +62,7 @@ const Login = () => {
       </span>
       <button className={styles.google}>Sign in with Google</button>
       <span className={styles.footer}>
-        Don't have an account? <Link to="/signup">Sign up</Link>
+        Don{"&apos;"}t have an account? <Link to="/signup">Sign up</Link>
       </span>
     </form>
   );

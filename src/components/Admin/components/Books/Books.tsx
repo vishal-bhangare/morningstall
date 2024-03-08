@@ -8,7 +8,7 @@ import { Languages, Genres, Editions } from "../../../../data/BooksData";
 import PdfViewer from "../../../PdfViewer/PdfViewer";
 import Book from "../../../../entities/Book";
 import { replaceAll } from "../../../../common/common";
-import useAllBooks from "../../../../hooks/queries/useAllBooks";
+import useBooks from "../../../../hooks/queries/useBooks";
 import useAddBook from "../../../../hooks/mutations/useAddBook";
 import IconButton from "../../../Utils/IconButton/IconButton";
 
@@ -45,7 +45,7 @@ const Books = () => {
   const [pdfModal, setPdfModal] = useState(false);
   const [pdfPages, setPdfPages] = useState(0);
 
-  const { data, isLoading, refetch } = useAllBooks(0, 0);
+  const { data, isLoading, refetch } = useBooks(0, 0);
   const addBookMutation = useAddBook();
   const pagesInPdf = (event: any) => {
     const reader = new FileReader();

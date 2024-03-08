@@ -1,4 +1,4 @@
-import useAllBooks from "../../hooks/queries/useAllBooks";
+import useBooks from "../../hooks/queries/useBooks";
 import Header from "../Home/Header/Header";
 import { replaceAll } from "../../common/common";
 import { Editions, Genres, Languages } from "../../data/BooksData";
@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 const BooksListing = () => {
   const [page, setPage] = useState(0);
-  const { data, isLoading } = useAllBooks(page, 12);
+  const { data, isLoading } = useBooks(page, 12);
   const N = data?.books.length;
   useEffect(() => {}, [data]);
   return (

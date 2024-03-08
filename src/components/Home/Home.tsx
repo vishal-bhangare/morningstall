@@ -1,25 +1,27 @@
 import { useEffect } from "react";
 import { replaceAll } from "../../common/common";
 import { Editions, Genres, Languages } from "../../data/BooksData";
-import Book from "../../entities/Book";
 import Header from "./Header/Header";
 import styles from "./Home.module.scss";
 
-import useAllBooks from "../../hooks/queries/useAllBooks";
+import useBooks from "../../hooks/queries/useBooks";
 import BooksSlider from "../BooksSlider/BooksSlider";
 import Carousel from "../Carousel/Carousel";
 
 const Home = () => {
-  const { data, isLoading } = useAllBooks(0);
-  const books: Book[] = data?.books;
-  useEffect(() => {
-    // getAllBooks()
-    //   .then((res) => {
-    //     setBooks(res.data.slice(0, 10));
-    //     setBooksData(res.data.slice(0, 3));
-    //   })
-    //   .catch((err) => console.log(err));
-  }, []);
+  const { data: recentBooks, isLoading: isRecentBooksLoading } = useBooks(
+    0,
+    10,
+    "recent_added",
+    "desc"
+  );
+  const { data: popularBooks, isLoading: isPopularBooksLoading } = useBooks(
+    0,
+    10,
+    "popularity",
+    "desc"
+  );
+  useEffect(() => {}, []);
   return (
     <div className={styles.home}>
       <Header />
@@ -75,9 +77,15 @@ const Home = () => {
           </form>
         </aside>{" "}
         <section>
-          {!isLoading && <Carousel books={books!.slice(0, 3)} />}
-          {!isLoading && <BooksSlider books={books!} title="Recent added" />}
-          {!isLoading && <BooksSlider books={books!} title="Most readed" />}
+          {!isPopularBooksLoading && (
+            <Carousel books={popularBooks!.books.slice(0, 3)} />
+          )}
+          {!isRecentBooksLoading && (
+            <BooksSlider books={recentBooks!.books} title="Recent added" />
+          )}
+          {!isPopularBooksLoading && (
+            <BooksSlider books={popularBooks!.books} title="Most popular" />
+          )}
         </section>
       </main>
       <footer className={styles.footer}>adsf</footer>

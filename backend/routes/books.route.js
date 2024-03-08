@@ -17,15 +17,32 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 booksRoute.route("/:page").get((req, res, next) => {
   let query = {};
+  const queryParams = req.query;
   const page = req.params.page;
-  const limit = req.query.limit;
-  let tags = Object.values(req.query);
+  const limit = queryParams.limit;
+  // sortBy = [recent_added, popularity, published_year]
+  let options = {};
+  const sortOrder = queryParams.sortOrder == "desc" ? -1 : 1;
+
+  if (queryParams.sortBy === "recent_added")
+    options = { sort: { added_on: sortOrder } };
+
+  // ratings should added later on
+  if (queryParams.sortBy === "popularity")
+    options = { sort: { views: sortOrder, favorites: sortOrder } };
+
+  if (queryParams.sortBy === "published_year")
+    options = { sort: { publicationYear: sortOrder } };
+  console.log(options);
+  let tags = Object.values(queryParams);
   if (tags.length) query.tags = { $all: tags };
 
   Books.countDocuments({}).then((total) => {
     const totalPages = Math.ceil(total / limit);
 
-    const options = limit !== -1 ? { skip: limit * page, limit: limit } : {};
+    options =
+      limit !== -1 ? { ...options, skip: limit * page, limit: limit } : {};
+
     Books.find({}, {}, options)
       .then((data) => {
         res.status(200).json({
@@ -40,6 +57,7 @@ booksRoute.route("/:page").get((req, res, next) => {
       });
   });
 });
+
 booksRoute.route("/search").get((req, res, next) => {
   const query = {
     $text: { $search: req.query.q },
@@ -68,6 +86,16 @@ booksRoute.route("/book/:id").get((req, res, next) => {
     });
 });
 
+booksRoute.route("/book/viewed/:id").patch((req, res, next) => {
+  Books.updateOne({ _id: req.params.id }, { $inc: { views: 1 } })
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      return next(err);
+    });
+});
+
 async function uploadFile(file, folder) {
   try {
     const storageRef = ref(storage, `${folder}/${file.originalname}`);
@@ -88,6 +116,7 @@ async function uploadFile(file, folder) {
     return error;
   }
 }
+
 downloadUrls = { pdf: "", coverPage: "" };
 
 booksRoute.route("/").post(
