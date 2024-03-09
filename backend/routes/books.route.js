@@ -1,6 +1,7 @@
 const express = require("express");
 const booksRoute = express.Router();
 const Books = require("../models/Books");
+const { convertToMongoQuery } = require("../utils/functions");
 const { initializeApp } = require("firebase/app");
 const {
   getStorage,
@@ -15,11 +16,31 @@ const storage = getStorage();
 
 const upload = multer({ storage: multer.memoryStorage() });
 
+booksRoute.route("/filters").get((req, res, next) => {
+  Books.aggregate([
+    {
+      $group: {
+        _id: null,
+        genre: { $addToSet: "$genre" },
+        language: { $addToSet: "$language" },
+      },
+    },
+  ])
+    .then((data) => {
+      res.status(200).json({
+        genre: data[0].genre,
+        language: data[0].language,
+        sortBy: ["recent_added", "popularity", "published_year"],
+      });
+    })
+    .catch((err) => next(err));
+});
+
 booksRoute.route("/:page").get((req, res, next) => {
-  let query = {};
   const queryParams = req.query;
+
   const page = req.params.page;
-  const limit = queryParams.limit;
+  const limit = queryParams.limit || 10;
   // sortBy = [recent_added, popularity, published_year]
   let options = {};
   const sortOrder = queryParams.sortOrder == "desc" ? -1 : 1;
@@ -33,17 +54,20 @@ booksRoute.route("/:page").get((req, res, next) => {
 
   if (queryParams.sortBy === "published_year")
     options = { sort: { publicationYear: sortOrder } };
-  console.log(options);
-  let tags = Object.values(queryParams);
-  if (tags.length) query.tags = { $all: tags };
 
-  Books.countDocuments({}).then((total) => {
+  const query = convertToMongoQuery(queryParams, [
+    "sortBy",
+    "sortOrder",
+    "limit",
+  ]);
+
+  Books.countDocuments(query).then((total) => {
     const totalPages = Math.ceil(total / limit);
 
     options =
       limit !== -1 ? { ...options, skip: limit * page, limit: limit } : {};
 
-    Books.find({}, {}, options)
+    Books.find(query, {}, options)
       .then((data) => {
         res.status(200).json({
           status: 1,
@@ -157,18 +181,5 @@ booksRoute.route("/").post(
       .catch((err) => next(err));
   }
 );
-const getDateDiff = (diff) => {
-  diffsec = diff / 1000;
-  if (diffsec < 60) return diffsec + " seconds";
-  else if (diffsec >= 60 && diffsec < 3600)
-    return Math.floor(diffsec / 60) + " minutes";
-  else if (diffsec >= 3600 && diffsec < 86400)
-    return Math.floor(diffsec / 3600) + " hrs";
-  else if (diffsec >= 86400 && diffsec < 2592000)
-    return diffsec / 86400 + " days";
-  else if (diffsec >= 2592000 && diffsec < 31536000)
-    return Math.floor(diffsec / 2592000) + " months";
-  else if (diffsec >= 31536000) return Math.floor(diffsec / 31536000) + " yrs";
-};
 
 module.exports = booksRoute;

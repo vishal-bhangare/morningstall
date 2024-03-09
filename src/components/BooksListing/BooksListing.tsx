@@ -1,18 +1,55 @@
 import useBooks from "../../hooks/queries/useBooks";
 import Header from "../Home/Header/Header";
-import { replaceAll } from "../../common/common";
-import { Editions, Genres, Languages } from "../../data/BooksData";
+import { replaceAll, toTitleCase } from "../../utils/functions";
 import styles from "./BooksListing.module.scss";
 import BookCard from "../BookCard/BookCard";
 import Book from "../../entities/Book";
 import IconButton from "../Utils/IconButton/IconButton";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+
+import useFilters from "../../hooks/queries/useFilters";
+
+export interface FiltersI {
+  sortBy?: string;
+  sortOrder?: string;
+  language?: string[];
+  genre?: string;
+}
 
 const BooksListing = () => {
   const [page, setPage] = useState(0);
-  const { data, isLoading } = useBooks(page, 12);
+  const { data: Filters, isLoading } = useFilters();
+  const [filters, setFilters] = useState<FiltersI>({
+    sortBy: "recent_added",
+    sortOrder: "desc",
+    genre: "",
+    language: [],
+  });
+  const { data, isLoading: isBooksLoading } = useBooks(page, 12, filters);
   const N = data?.books.length;
-  useEffect(() => {}, [data]);
+
+  const handleChange = (e: any) => {
+    if (e.target.type === "checkbox" && e.target.checked) {
+      setFilters((filters) => ({
+        ...filters,
+        [e.target.name]: [...filters?.language!, e.target.value],
+      }));
+    } else if (e.target.type === "checkbox" && !e.target.checked) {
+      setFilters((filters) => ({
+        ...filters,
+        [e.target.name]: filters.language!.filter(
+          (item) => item !== e.target.value
+        ),
+      }));
+    } else {
+      setFilters((filters) => ({
+        ...filters,
+        [e.target.name]: e.target.value,
+      }));
+    }
+  };
+
+  useEffect(() => {}, [data, filters]);
   return (
     <>
       <Header></Header>
@@ -20,53 +57,51 @@ const BooksListing = () => {
         <aside className={styles.aside}>
           <form>
             <label htmlFor="sortBy">Sort By:</label>
-            <select defaultValue="default">
-              <option value="default"></option>
-              <option value="added">Added Date</option>
-              <option value="published">Published Date</option>
-              <option value="popularity">Popularity</option>
+            <select
+              name="sortBy"
+              defaultValue="default"
+              onChange={handleChange}
+            >
+              {!isLoading &&
+                Filters.sortBy.map((item: string, i: number) => (
+                  <option value={item} key={i}>
+                    {toTitleCase(item)}
+                  </option>
+                ))}
             </select>
             <label htmlFor="languages">Language:</label>
             <div id={styles.languages}>
-              {Languages.map((language, index) => (
-                <label htmlFor={language.toLowerCase()} key={index}>
-                  <input
-                    type="checkbox"
-                    key={index}
-                    id={language.toLowerCase()}
-                    value={language.toLowerCase()}
-                  />
-                  {language}
-                </label>
-              ))}
+              {!isLoading &&
+                Filters.language.map((language: string, i: number) => (
+                  <label htmlFor={language.toLowerCase()} key={i}>
+                    <input
+                      type="checkbox"
+                      key={i}
+                      name="language"
+                      id={language.toLowerCase()}
+                      value={language.toLowerCase()}
+                      onChange={handleChange}
+                    />
+                    {language}
+                  </label>
+                ))}
             </div>
             <label htmlFor="genre">Genre</label>
-            <select id="genre">
+            <select name="genre" onChange={handleChange}>
               <option value="" selected></option>
-              {Genres.map((genre, index) => (
-                <option
-                  key={index}
-                  value={replaceAll(genre.toLowerCase(), " ", "_")}
-                >
-                  {genre}
-                </option>
-              ))}
-            </select>
-            <label htmlFor="edition">Edition</label>
-            <select id="edition" defaultValue={"default"}>
-              <option value="default"></option>
-              {Editions.map((edition, index) => (
-                <option
-                  key={index}
-                  value={replaceAll(edition.toLowerCase(), " ", "_")}
-                >
-                  {edition}
-                </option>
-              ))}
+              {!isLoading &&
+                Filters.genre.map((genre: string, i: number) => (
+                  <option
+                    key={i}
+                    value={replaceAll(genre.toLowerCase(), " ", "_")}
+                  >
+                    {toTitleCase(genre)}
+                  </option>
+                ))}
             </select>
           </form>
         </aside>{" "}
-        {!isLoading && (
+        {!isBooksLoading && (
           <section className={styles.booksWrapper}>
             <div
               className={styles.books}

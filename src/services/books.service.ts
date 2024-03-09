@@ -1,4 +1,5 @@
 import axios from "axios";
+import { FiltersI } from "../components/BooksListing/BooksListing";
 
 // const API_URL = "https://morningstall-backend.onrender.com/api/books";
 
@@ -22,16 +23,22 @@ class BooksClient {
     });
   };
 
-  getBooks = (
-    page: number,
-    limit: number = 10,
-    sortBy?: string,
-    sortOrder?: string
-  ) => {
+  getBooks = (page: number, limit: number = 10, filters?: FiltersI) => {
+    const filterArr = Object.entries(filters!);
+    let filterStr = "";
+
+    filterArr.forEach((filter) => {
+      if (!!filter[1].length && typeof filter[1] !== "string") {
+        filter[1].forEach((filterValue: string, i: number) => {
+          filterStr += `&${i ? `${filter[0]}${i}` : filter[0]}=${filterValue}`;
+        });
+      } else if (!!filter[1] && typeof filter[1] === "string") {
+        filterStr += `&${filter[0]}=${filter[1]}`;
+      }
+    });
+
     return axiosInstance
-      .get(
-        `${this.endpoint}/${page}?limit=${limit}&sortBy=${sortBy}&sortOrder=${sortOrder}`
-      )
+      .get(`${this.endpoint}/${page}?limit=${limit}${filterStr}`)
       .then((res) => res.data);
   };
 
@@ -43,6 +50,10 @@ class BooksClient {
     return axiosInstance
       .patch(`${this.endpoint}/${id}`)
       .then((res) => res.data);
+  };
+
+  getFilters = () => {
+    return axiosInstance.get(`${this.endpoint}`).then((res) => res.data);
   };
 }
 

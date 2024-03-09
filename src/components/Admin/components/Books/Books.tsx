@@ -7,7 +7,7 @@ import { Languages, Genres, Editions } from "../../../../data/BooksData";
 
 import PdfViewer from "../../../PdfViewer/PdfViewer";
 import Book from "../../../../entities/Book";
-import { replaceAll } from "../../../../common/common";
+import { replaceAll } from "../../../../utils/functions";
 import useBooks from "../../../../hooks/queries/useBooks";
 import useAddBook from "../../../../hooks/mutations/useAddBook";
 import IconButton from "../../../Utils/IconButton/IconButton";

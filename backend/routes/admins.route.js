@@ -2,7 +2,7 @@ const express = require("express");
 const adminsRoute = express.Router();
 const jwt = require("jsonwebtoken");
 const authorize = require("../middlewares/auth");
-const { verifyHash } = require("../common/passwordHash");
+const { verifyHash } = require("../utils/passwordHash");
 const Admin = require("../models/Admin");
 
 adminsRoute.route("/login").post((req, res, next) => {

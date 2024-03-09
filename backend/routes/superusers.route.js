@@ -4,7 +4,7 @@ const Superuser = require("../models/Superuser");
 const Admin = require("../models/Admin");
 const jwt = require("jsonwebtoken");
 const authorize = require("../middlewares/auth");
-const { verifyHash, genHash } = require("../common/passwordHash");
+const { verifyHash, genHash } = require("../utils/passwordHash");
 const { check, validationResult } = require("express-validator");
 
 superusersRoute.route("/login").post((req, res, next) => {
