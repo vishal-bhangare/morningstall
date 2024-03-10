@@ -8,6 +8,7 @@ import IconButton from "../Utils/IconButton/IconButton";
 import { ChangeEvent, useEffect, useState } from "react";
 
 import useFilters from "../../hooks/queries/useFilters";
+import { useLocation } from "react-router-dom";
 
 export interface FiltersI {
   sortBy?: string;
@@ -17,6 +18,7 @@ export interface FiltersI {
 }
 
 const BooksListing = () => {
+  const { state } = useLocation();
   const [page, setPage] = useState(0);
   const { data: Filters, isLoading } = useFilters();
   const [filters, setFilters] = useState<FiltersI>({
@@ -24,6 +26,7 @@ const BooksListing = () => {
     sortOrder: "desc",
     genre: "",
     language: [],
+    ...state,
   });
   const { data, isLoading: isBooksLoading } = useBooks(page, 12, filters);
   const N = data?.books.length;
@@ -49,7 +52,9 @@ const BooksListing = () => {
     }
   };
 
-  useEffect(() => {}, [data, filters]);
+  useEffect(() => {
+    console.log(filters);
+  }, [data, filters]);
   return (
     <>
       <Header></Header>
@@ -59,7 +64,7 @@ const BooksListing = () => {
             <label htmlFor="sortBy">Sort By:</label>
             <select
               name="sortBy"
-              defaultValue="default"
+              defaultValue={filters.sortBy}
               onChange={handleChange}
             >
               {!isLoading &&
@@ -87,7 +92,11 @@ const BooksListing = () => {
                 ))}
             </div>
             <label htmlFor="genre">Genre</label>
-            <select name="genre" onChange={handleChange}>
+            <select
+              name="genre"
+              onChange={handleChange}
+              defaultValue={filters.genre}
+            >
               <option value="" selected></option>
               {!isLoading &&
                 Filters.genre.map((genre: string, i: number) => (

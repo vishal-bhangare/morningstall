@@ -3,19 +3,24 @@ import Book from "../../entities/Book";
 import styles from "./BooksSlider.module.scss";
 import { useNavigate } from "react-router-dom";
 import BookCard from "../BookCard/BookCard";
+import { FiltersI } from "../BooksListing/BooksListing";
+import { toTitleCase } from "../../utils/functions";
 interface Props {
   title: string;
   books: Book[];
-  tag?: string;
+  filters?: FiltersI;
 }
-const BooksSlider = ({ title, books }: Props) => {
+const BooksSlider = ({ title, books, filters }: Props) => {
   const imageListRef = createRef<HTMLDivElement>();
-
+  const navigate = useNavigate();
   return (
     <div className={[styles.recent, styles.imageSlider].join(" ")}>
       <div className={styles.title}>
-        {title}
-        <div className={styles.seeAll}>
+        {toTitleCase(title)}
+        <div
+          className={styles.seeAll}
+          onClick={() => navigate(`/books/${title}`, { state: filters })}
+        >
           See All <i className="fa-regular fa-chevrons-right"></i>
         </div>
       </div>

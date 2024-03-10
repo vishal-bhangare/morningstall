@@ -1,8 +1,15 @@
-export const Languages = ["Marathi", "Hindi", "English", "French"];
+export const Languages = [
+  "Marathi",
+  "Hindi",
+  "English",
+  "French",
+  "Portuguese",
+];
 export const Genres = [
   "Mystery",
   "Science Fiction",
   "Romance",
+  "Dark Romance",
   "Inspirational",
   "Adventure",
   "Tragedy",
@@ -13,6 +20,8 @@ export const Genres = [
   "Gothic fiction",
   "Narrative",
   "Fiction",
+  "Comedy",
+  "Self help",
 ];
 export const Editions = [
   "Revised Edition",

@@ -19,63 +19,49 @@ const Home = () => {
     10,
     { sortBy: "popularity", sortOrder: "desc" }
   );
-  const { data: Filters, isLoading } = useFilters();
+  const { data: romanceBooks, isLoading: isRomanceBooksLoading } = useBooks(
+    0,
+    10,
+    { sortBy: "popularity", sortOrder: "desc", genre: "romance" }
+  );
+
   useEffect(() => {}, []);
   return (
     <div className={styles.home}>
       <Header />
 
       <main>
-        <aside className={styles.aside}>
-          <form>
-            <label htmlFor="sortBy">Sort By:</label>
-            <select defaultValue="default">
-              {!isLoading &&
-                Filters.sortBy.map((item: string, i: number) => (
-                  <option value={item} key={i}>
-                    {toTitleCase(item)}
-                  </option>
-                ))}
-            </select>
-            <label htmlFor="languages">Language:</label>
-            <div id={styles.languages}>
-              {!isLoading &&
-                Filters.language.map((language: string, i: number) => (
-                  <label htmlFor={language.toLowerCase()} key={i}>
-                    <input
-                      type="checkbox"
-                      key={i}
-                      id={language.toLowerCase()}
-                      value={language.toLowerCase()}
-                    />
-                    {language}
-                  </label>
-                ))}
-            </div>
-            <label htmlFor="genre">Genre</label>
-            <select id="genre">
-              <option value="" selected></option>
-              {!isLoading &&
-                Filters.genre.map((genre: string, i: number) => (
-                  <option
-                    key={i}
-                    value={replaceAll(genre.toLowerCase(), " ", "_")}
-                  >
-                    {toTitleCase(genre)}
-                  </option>
-                ))}
-            </select>
-          </form>
-        </aside>{" "}
         <section>
           {!isPopularBooksLoading && (
             <Carousel books={popularBooks!.books.slice(0, 3)} />
           )}
           {!isRecentBooksLoading && (
-            <BooksSlider books={recentBooks!.books} title="Recent added" />
+            <BooksSlider
+              books={recentBooks!.books}
+              title="recent_added"
+              filters={{ sortBy: "recent_added", sortOrder: "desc" }}
+            />
           )}
           {!isPopularBooksLoading && (
-            <BooksSlider books={popularBooks!.books} title="Most popular" />
+            <BooksSlider
+              title="popular"
+              books={popularBooks!.books}
+              filters={{
+                sortBy: "popularity",
+                sortOrder: "desc",
+              }}
+            />
+          )}
+          {!isRomanceBooksLoading && (
+            <BooksSlider
+              books={romanceBooks!.books}
+              title="Romance"
+              filters={{
+                sortBy: "popularity",
+                sortOrder: "desc",
+                genre: "romance",
+              }}
+            />
           )}
         </section>
       </main>

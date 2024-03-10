@@ -15,7 +15,11 @@ const BookDetail = () => {
   const { id } = useParams();
   const [bookUrl, setBookUrl] = useState("");
   const { data: bookdata, isLoading } = useBook(id!);
-  const { data, isLoading: similarBooksLoading } = useBooks(0);
+  const { data, isLoading: similarBooksLoading } = useBooks(0, 10, {
+    sortBy: "popularity",
+    sortOrder: "desc",
+    genre: bookdata?.genre,
+  });
   const bookViewedMutation = useBookViewed();
   const books: Book[] = data?.books;
   const DetailsToBeDisplayed = [

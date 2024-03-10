@@ -45,7 +45,10 @@ const Books = () => {
   const [pdfModal, setPdfModal] = useState(false);
   const [pdfPages, setPdfPages] = useState(0);
 
-  const { data, isLoading, refetch } = useBooks(0, 0);
+  const { data, isLoading, refetch } = useBooks(0, 0, {
+    sortBy: "recent_added",
+    sortOrder: "desc",
+  });
   const addBookMutation = useAddBook();
   const pagesInPdf = (event: any) => {
     const reader = new FileReader();
@@ -280,7 +283,6 @@ const Books = () => {
                     {...register("genre")}
                   >
                     <option value=""></option>
-                    <option value="mystery">Mystery</option>
                     {Genres.map((genre, index) => {
                       return (
                         <option

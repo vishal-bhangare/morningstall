@@ -19,7 +19,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
-      { path: "/books", element: <BooksListing /> },
+      { path: "/books/:tag", element: <BooksListing /> },
       { path: "/book/:id", element: <BookDetail /> },
 
       { path: "/admin", element: <Admin /> },
