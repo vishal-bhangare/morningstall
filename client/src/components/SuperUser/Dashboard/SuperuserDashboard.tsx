@@ -20,7 +20,7 @@ type AdminFormData = z.infer<typeof adminSchema>;
 
 const SuperuserDashboard = () => {
   const [isUserVisible, setUserVisible] = useState(false);
-  const [user, setUser] = useState("");
+  const [user] = useState("");
   const {
     register: adminRegistor,
     handleSubmit: adminHandleSubmit,
@@ -30,9 +30,8 @@ const SuperuserDashboard = () => {
 
   const onAdminSubmit = (formData: FieldValues) => {
     createAdmin(formData)
-      .then((res) => {
+      .then(() => {
         reset();
-        console.log("user is created.");
       })
       .catch((err) => console.log(err));
   };

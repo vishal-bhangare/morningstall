@@ -56,7 +56,7 @@ const BookDetail = () => {
                 <div className={styles.details}>
                   <span className={styles.name}>{bookdata?.name}</span>
                   <div className={styles.other}>
-                    {Object.entries(bookdata).map((item: [string, any], i) => {
+                    {Object.entries(bookdata).map((item: [string, any]) => {
                       if (DetailsToBeDisplayed.includes(item[0]) && item[1])
                         return (
                           <>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { pdfjs, Document, Page } from "react-pdf";
 import styles from "./PdfViewer.module.scss";
 import IconButton from "../Utils/IconButton/IconButton";

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Logo from "../../Logo/Logo";
 import Button from "../../Utils/Button/Button";
 const Header = () => {
-  const [isLoggedIn, setLoggedIn] = useState(true);
+  // const [isLoggedIn, setLoggedIn] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchBoxVisibility, setSearchBoxVisibility] = useState(false);
   const isBigScreen = useMediaQuery({ query: "(min-width: 1024px)" });

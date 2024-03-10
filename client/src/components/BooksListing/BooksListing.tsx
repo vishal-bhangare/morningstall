@@ -5,7 +5,7 @@ import styles from "./BooksListing.module.scss";
 import BookCard from "../BookCard/BookCard";
 import Book from "../../entities/Book";
 import IconButton from "../Utils/IconButton/IconButton";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import useFilters from "../../hooks/queries/useFilters";
 import { useLocation } from "react-router-dom";

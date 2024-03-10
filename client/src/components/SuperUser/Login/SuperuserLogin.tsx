@@ -32,7 +32,6 @@ const SuperuserLogin = () => {
           navigate("/superuser/dashboard");
         }
         if (res.status == 401) alert("Invalid credentials.");
-        console.log(res);
       })
       .catch((err: any) => {
         if (err.status == 401) alert("Invalid credentials.");

@@ -31,4 +31,4 @@ class APIClient<T> {
   };
 }
 
-export default axiosInstance;
+export default APIClient;

@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, useForm } from "react-hook-form";
-import { any, set, z } from "zod";
+import { any, z } from "zod";
 import styles from "./Books.module.scss";
 import { useEffect, useState } from "react";
 import { Languages, Genres, Editions } from "../../../../data/BooksData";
@@ -42,7 +42,6 @@ const Books = () => {
 
   const [modal, setModal] = useState(false);
   const [curUrl, setCurUrl] = useState("");
-  const [pdfModal, setPdfModal] = useState(false);
   const [pdfPages, setPdfPages] = useState(0);
 
   const { data, isLoading, refetch } = useBooks(0, 0, {
@@ -98,12 +97,12 @@ const Books = () => {
     }
     setStatusMessage("Upload data...", "file");
     addBookMutation.mutate(data, {
-      onSuccess: (data: any, variables: any, context: any) => {
+      onSuccess: () => {
         setStatusMessage("Data uploaded.");
         refetch();
         reset();
       },
-      onError: (error: any, variables: any, context: any) => {
+      onError: (error: any) => {
         console.log(error);
       },
     });
@@ -144,7 +143,6 @@ const Books = () => {
                         <button
                           onClick={() => {
                             setCurUrl(() => book["pdf"]);
-                            setPdfModal(() => true);
                           }}
                         >
                           view

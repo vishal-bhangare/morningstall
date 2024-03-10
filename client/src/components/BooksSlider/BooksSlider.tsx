@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import { createRef } from "react";
 import Book from "../../entities/Book";
 import styles from "./BooksSlider.module.scss";
 import { useNavigate } from "react-router-dom";

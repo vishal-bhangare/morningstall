@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Book from "../../entities/Book";
 import CarouselItem from "./CarouselItem/CarouselItem";
 import styles from "./Carousel.module.scss";
@@ -52,7 +52,7 @@ const Carousel = ({ books }: Props) => {
         ))}
       </div>
       <div className={styles.indicators}>
-        {books.map((item, index) => (
+        {books.map((_item, index) => (
           <i
             className={`fa-regular ${
               index == activeIndex ? "fa-circle-dot" : "fa-circle"

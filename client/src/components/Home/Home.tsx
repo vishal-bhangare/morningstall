@@ -1,10 +1,7 @@
 import { useEffect } from "react";
-import { replaceAll, toTitleCase } from "../../utils/functions";
 import Header from "./Header/Header";
 import styles from "./Home.module.scss";
-
 import useBooks from "../../hooks/queries/useBooks";
-import useFilters from "../../hooks/queries/useFilters";
 import BooksSlider from "../BooksSlider/BooksSlider";
 import Carousel from "../Carousel/Carousel";
 
