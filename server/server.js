@@ -6,8 +6,7 @@ const createError = require("http-errors");
 const crypto = require("crypto");
 const { scryptSync, randomBytes, timingSafeEqual } = require("crypto");
 const uri =
-  process.env.URI ||
-  "mongodb+srv://vishal:Vishal2108@cluster0.uvjuwun.mongodb.net/YourPROJECT_ID";
+  process.env.URI;
 
 mongoose
   .connect(uri)
