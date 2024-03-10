@@ -1,12 +1,11 @@
 import axios from "axios";
 import { FiltersI } from "../components/BooksListing/BooksListing";
 
-// const API_URL = "https://morningstall-backend.onrender.com/api/books";
-
+const API_URL = import.meta.env.VITE_API_URL
 const API_URL_LOCAL = "http://localhost:4000/api/books";
 
 const axiosInstance = axios.create({
-  baseURL: API_URL_LOCAL,
+  baseURL: `${API_URL}/books`,
   headers: {},
 });
 

@@ -1,8 +1,10 @@
 import axios from "axios";
 
+const API_URL = import.meta.env.VITE_API_URL
+
 export function getUser(username: string) {
   axios
-    .get(`http://localhost:4000/api/users/?username=${username}`)
+    .get(`${API_URL}/users/?username=${username}`)
     .then((res) => {
       return res;
     })
