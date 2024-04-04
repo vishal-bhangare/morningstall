@@ -40,7 +40,7 @@ const BooksSlider = ({ title, books, filters, loading }: Props) => {
         <div className={styles.wrapper} ref={imageListRef}>
           <div className={styles.imageList}>
             {loading
-              ? [...Array(10).keys()].map((val, i) => (
+              ? [...Array(10).keys()].map((_val, i) => (
                   <BookCard key={i} isLoading={loading} />
                 ))
               : books!.map((book, index) => (

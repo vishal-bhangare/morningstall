@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import Book from "../../entities/Book";
-import CarouselItem from "./CarouselItem/CarouselItem";
-import styles from "./Carousel.module.scss";
-import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import Book from "../../entities/Book";
+import styles from "./Carousel.module.scss";
+import CarouselItem from "./CarouselItem/CarouselItem";
 interface Props {
   books: Book[];
   loading?: boolean;
@@ -19,7 +18,6 @@ const Carousel = ({ books, loading }: Props) => {
   };
   useEffect(() => {
     const timer = setInterval(() => {
-      // setActiveIndex((activeIndex + 1) % 3);
       setActiveIndex((activeIndex + 1) % 3);
     }, 3000);
     return () => {

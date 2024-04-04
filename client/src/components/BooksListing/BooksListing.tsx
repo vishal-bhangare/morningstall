@@ -117,7 +117,7 @@ const BooksListing = () => {
               }}
             >
               {booksLoading
-                ? [...Array(10).keys()].map((val, i) => (
+                ? [...Array(10).keys()].map((_val, i) => (
                     <BookCard key={i} isLoading={booksLoading} />
                   ))
                 : data.books?.map((book: Book) => (
