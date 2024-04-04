@@ -1,14 +1,14 @@
-import useBooks from "../../hooks/queries/useBooks";
-import Header from "../Home/Header/Header";
-import { replaceAll, toTitleCase } from "../../utils/functions";
-import styles from "./BooksListing.module.scss";
-import BookCard from "../BookCard/BookCard";
-import Book from "../../entities/Book";
-import IconButton from "../Utils/IconButton/IconButton";
 import { useEffect, useState } from "react";
+import Book from "../../entities/Book";
+import useBooks from "../../hooks/queries/useBooks";
+import { replaceAll, toTitleCase } from "../../utils/functions";
+import BookCard from "../BookCard/BookCard";
+import Header from "../Home/Header/Header";
+import IconButton from "../Utils/IconButton/IconButton";
+import styles from "./BooksListing.module.scss";
 
-import useFilters from "../../hooks/queries/useFilters";
 import { useLocation } from "react-router-dom";
+import useFilters from "../../hooks/queries/useFilters";
 
 export interface FiltersI {
   sortBy?: string;
@@ -28,7 +28,7 @@ const BooksListing = () => {
     language: [],
     ...state,
   });
-  const { data, isLoading: isBooksLoading } = useBooks(page, 12, filters);
+  const { data, isLoading: booksLoading } = useBooks(page, 12, filters);
   const N = data?.books.length;
 
   const handleChange = (e: any) => {
@@ -52,9 +52,7 @@ const BooksListing = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(filters);
-  }, [data, filters]);
+  useEffect(() => {}, [data, filters]);
   return (
     <>
       <Header></Header>
@@ -110,7 +108,7 @@ const BooksListing = () => {
             </select>
           </form>
         </aside>{" "}
-        {!isBooksLoading && (
+        {
           <section className={styles.booksWrapper}>
             <div
               className={styles.books}
@@ -118,29 +116,39 @@ const BooksListing = () => {
                 gridTemplateRows: `repeat(${Math.ceil(N / 4)}, 1fr)`,
               }}
             >
-              {data.books?.map((book: Book) => (
-                <BookCard book={book} key={book._id} />
-              ))}
+              {booksLoading
+                ? [...Array(10).keys()].map((val, i) => (
+                    <BookCard key={i} isLoading={booksLoading} />
+                  ))
+                : data.books?.map((book: Book) => (
+                    <BookCard
+                      book={book}
+                      key={book._id}
+                      isLoading={booksLoading}
+                    />
+                  ))}
             </div>
-            <div className={styles.pagination}>
-              <IconButton
-                name="chevron-left"
-                size="sm"
-                disabled={!page ? true : false}
-                onClick={() => setPage((page) => page - 1)}
-              />
-              <div className={styles.pageInfo}>
-                {page + 1} of {data.totalPages}
+            {!booksLoading && (
+              <div className={styles.pagination}>
+                <IconButton
+                  name="chevron-left"
+                  size="sm"
+                  disabled={!page ? true : false}
+                  onClick={() => setPage((page) => page - 1)}
+                />
+                <div className={styles.pageInfo}>
+                  {page + 1} of {data.totalPages}
+                </div>
+                <IconButton
+                  name="chevron-right"
+                  size="sm"
+                  disabled={page + 1 == data.totalPages ? true : false}
+                  onClick={() => setPage((page) => page + 1)}
+                />
               </div>
-              <IconButton
-                name="chevron-right"
-                size="sm"
-                disabled={page + 1 == data.totalPages ? true : false}
-                onClick={() => setPage((page) => page + 1)}
-              />
-            </div>
+            )}
           </section>
-        )}
+        }
       </main>
     </>
   );

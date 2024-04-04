@@ -3,10 +3,8 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const createError = require("http-errors");
-const crypto = require("crypto");
-const { scryptSync, randomBytes, timingSafeEqual } = require("crypto");
-const uri =
-  process.env.URI;
+require("dotenv").config();
+const uri = process.env.DB_URI;
 
 mongoose
   .connect(uri)

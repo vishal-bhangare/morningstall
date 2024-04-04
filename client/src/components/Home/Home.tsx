@@ -29,40 +29,46 @@ const Home = () => {
 
       <main>
         <section>
-          {!isPopularBooksLoading && (
-            <Carousel books={popularBooks!.books.slice(0, 3)} />
-          )}
-          {!isRecentBooksLoading && (
-            <BooksSlider
-              books={recentBooks!.books}
-              title="recent_added"
-              filters={{ sortBy: "recent_added", sortOrder: "desc" }}
-            />
-          )}
-          {!isPopularBooksLoading && (
-            <BooksSlider
-              title="popular"
-              books={popularBooks!.books}
-              filters={{
-                sortBy: "popularity",
-                sortOrder: "desc",
-              }}
-            />
-          )}
-          {!isRomanceBooksLoading && (
-            <BooksSlider
-              books={romanceBooks!.books}
-              title="Romance"
-              filters={{
-                sortBy: "popularity",
-                sortOrder: "desc",
-                genre: "romance",
-              }}
-            />
-          )}
+          <Carousel
+            books={
+              isPopularBooksLoading
+                ? [1, 2, 3]
+                : popularBooks?.books.slice(0, 3)
+            }
+            loading={isPopularBooksLoading}
+          />
+
+          <BooksSlider
+            books={recentBooks?.books}
+            title="recent_added"
+            filters={{ sortBy: "recent_added", sortOrder: "desc" }}
+            loading={isRecentBooksLoading}
+          />
+
+          <BooksSlider
+            title="popular"
+            books={popularBooks?.books}
+            filters={{
+              sortBy: "popularity",
+              sortOrder: "desc",
+            }}
+            loading={isPopularBooksLoading}
+          />
+          <BooksSlider
+            books={romanceBooks?.books}
+            title="Romance"
+            filters={{
+              sortBy: "popularity",
+              sortOrder: "desc",
+              genre: "romance",
+            }}
+            loading={isRomanceBooksLoading}
+          />
         </section>
       </main>
-      <footer className={styles.footer}>adsf</footer>
+      <footer className={styles.footer}>
+        Footer not implemented, added soon:{")"}
+      </footer>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import { useMediaQuery } from "react-responsive";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../Logo/Logo";
 import Button from "../../Utils/Button/Button";
 const Header = () => {
@@ -9,7 +9,7 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchBoxVisibility, setSearchBoxVisibility] = useState(false);
   const isBigScreen = useMediaQuery({ query: "(min-width: 1024px)" });
-
+  const navigate = useNavigate();
   const toggleSearchBox = () => {
     setSearchBoxVisibility(!searchBoxVisibility);
   };
@@ -20,7 +20,7 @@ const Header = () => {
   }, []);
   return (
     <div className={styles.container}>
-      <div className={styles.start}>
+      <div className={styles.start} onClick={() => navigate(`/`)}>
         <Logo color="#111" />
         {/* <span className={styles.logo}>Morningstall</span>{" "} */}
       </div>

@@ -9,8 +9,9 @@ interface Props {
   title: string;
   books: Book[];
   filters?: FiltersI;
+  loading?: boolean;
 }
-const BooksSlider = ({ title, books, filters }: Props) => {
+const BooksSlider = ({ title, books, filters, loading }: Props) => {
   const imageListRef = createRef<HTMLDivElement>();
   const navigate = useNavigate();
   return (
@@ -38,9 +39,13 @@ const BooksSlider = ({ title, books, filters }: Props) => {
         ></i>
         <div className={styles.wrapper} ref={imageListRef}>
           <div className={styles.imageList}>
-            {books!.map((book, index) => (
-              <BookCard book={book} key={index} />
-            ))}
+            {loading
+              ? [...Array(10).keys()].map((val, i) => (
+                  <BookCard key={i} isLoading={loading} />
+                ))
+              : books!.map((book, index) => (
+                  <BookCard book={book} key={index} isLoading={loading} />
+                ))}
           </div>
         </div>
         <i

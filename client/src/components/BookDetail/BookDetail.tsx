@@ -1,15 +1,15 @@
 import { useParams } from "react-router-dom";
 
-import Header from "../Home/Header/Header";
-import styles from "./BookDetail.module.scss";
-import useBook from "../../hooks/queries/useBook";
-import Button from "../Utils/Button/Button";
-import BooksSlider from "../BooksSlider/BooksSlider";
-import useBooks from "../../hooks/queries/useBooks";
-import Book from "../../entities/Book";
-import PdfViewer from "../PdfViewer/PdfViewer";
 import { useEffect, useState } from "react";
+import Book from "../../entities/Book";
 import useBookViewed from "../../hooks/mutations/useBookViewed";
+import useBook from "../../hooks/queries/useBook";
+import useBooks from "../../hooks/queries/useBooks";
+import BooksSlider from "../BooksSlider/BooksSlider";
+import Header from "../Home/Header/Header";
+import PdfViewer from "../PdfViewer/PdfViewer";
+import Button from "../Utils/Button/Button";
+import styles from "./BookDetail.module.scss";
 
 const BookDetail = () => {
   const { id } = useParams();
@@ -86,9 +86,13 @@ const BookDetail = () => {
             </span>
           </section>
           <section className={styles.similarBooks}>
-            {!similarBooksLoading && (
-              <BooksSlider title={"Similar Books"} books={books} />
-            )}
+            {
+              <BooksSlider
+                title={"Similar Books"}
+                books={books}
+                loading={similarBooksLoading}
+              />
+            }
           </section>
           <section className={styles.reviews}>
             <span className={styles.title}>Reviews :</span>
