@@ -17,14 +17,13 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <Home /> },
+      { path: "/admin", element: <Admin /> },
+      { path: "/superuser/login", element: <SuperuserLogin /> },
+      { path: "/superuser/dashboard", element: <SuperuserDashboard /> },
       { path: "/login", element: <Login /> },
       { path: "/signup", element: <Signup /> },
       { path: "/books/:tag", element: <BooksListing /> },
       { path: "/book/:id", element: <BookDetail /> },
-
-      { path: "/admin", element: <Admin /> },
-      { path: "/superuser/login", element: <SuperuserLogin /> },
-      { path: "/superuser/dashboard", element: <SuperuserDashboard /> },
     ],
   },
 ]);
