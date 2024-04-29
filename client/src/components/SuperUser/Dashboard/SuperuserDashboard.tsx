@@ -30,12 +30,15 @@ const SuperuserDashboard = () => {
 
   const onAdminSubmit = (formData: FieldValues) => {
     createAdmin(formData)
-      .then(() => {
+      .then((data) => {
+        console.log(data);
         reset();
       })
       .catch((err) => console.log(err));
   };
-
+  const handleLogout = () => {
+    sessionStorage.removeItem("superuserToken");
+  };
   const toggleUserVisible = () => {
     setUserVisible(!isUserVisible);
   };
@@ -58,7 +61,7 @@ const SuperuserDashboard = () => {
               </li>
             )}
             {isUserVisible && (
-              <li>
+              <li onClick={handleLogout}>
                 Logout<i></i>
               </li>
             )}

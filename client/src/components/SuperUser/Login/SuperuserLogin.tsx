@@ -28,7 +28,7 @@ const SuperuserLogin = () => {
     login(formData)
       .then((res: any) => {
         if (res.status == 200) {
-          sessionStorage.setItem("token", res.data.token);
+          sessionStorage.setItem("superuserToken", res.data.token);
           navigate("/superuser/dashboard");
         }
         if (res.status == 401) alert("Invalid credentials.");
