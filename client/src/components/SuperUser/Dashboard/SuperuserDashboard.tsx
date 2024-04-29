@@ -4,6 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, useForm } from "react-hook-form";
 import { createAdmin } from "../../../services/superuser.service";
+import { useNavigate } from "react-router-dom";
 
 const adminSchema = z
   .object({
@@ -27,7 +28,7 @@ const SuperuserDashboard = () => {
     reset,
     formState: { errors: adminErrors },
   } = useForm<AdminFormData>({ resolver: zodResolver(adminSchema) });
-
+  const navigate = useNavigate();
   const onAdminSubmit = (formData: FieldValues) => {
     createAdmin(formData)
       .then((data) => {
@@ -38,6 +39,7 @@ const SuperuserDashboard = () => {
   };
   const handleLogout = () => {
     sessionStorage.removeItem("superuserToken");
+    navigate("/superuser/login");
   };
   const toggleUserVisible = () => {
     setUserVisible(!isUserVisible);
