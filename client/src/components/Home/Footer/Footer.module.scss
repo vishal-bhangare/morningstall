@@ -1,0 +1,26 @@
+@import "../../../common/common.scss";
+
+.footer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f7f7f7;
+  padding: 1rem 0;
+  gap: 10px;
+  .links {
+    display: flex;
+    gap: 10px;
+
+    .link {
+      text-decoration: none;
+      color: black;
+    }
+    .link:hover {
+      text-decoration: underline;
+    }
+  }
+  .copyright {
+    font-size: 0.8rem;
+  }
+}

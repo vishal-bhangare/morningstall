@@ -4,6 +4,7 @@ import styles from "./Home.module.scss";
 import useBooks from "../../hooks/queries/useBooks";
 import BooksSlider from "../BooksSlider/BooksSlider";
 import Carousel from "../Carousel/Carousel";
+import Footer from "./Footer/Footer";
 
 const Home = () => {
   const { data: recentBooks, isLoading: isRecentBooksLoading } = useBooks(
@@ -67,7 +68,7 @@ const Home = () => {
         </section>
       </main>
       <footer className={styles.footer}>
-        Footer not implemented, added soon:{")"}
+        <Footer />
       </footer>
     </div>
   );
