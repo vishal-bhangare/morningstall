@@ -101,9 +101,9 @@ const Header = () => {
           ></i>
         )} */}
 
-        <Button size="md" mode="dark">
+        {/* <Button size="md" mode="dark">
           <Link to="/login">Signin</Link>
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
