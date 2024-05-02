@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import { useMediaQuery } from "react-responsive";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../Logo/Logo";
-import Button from "../../Utils/Button/Button";
+// import Button from "../../Utils/Button/Button";
 const Header = () => {
   // const [isLoggedIn, setLoggedIn] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
