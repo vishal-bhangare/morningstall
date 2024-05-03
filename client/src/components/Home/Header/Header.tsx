@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import { useMediaQuery } from "react-responsive";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../Logo/Logo";
-// import Button from "../../Utils/Button/Button";
+import Button from "../../Utils/Button/Button";
 const Header = () => {
   // const [isLoggedIn, setLoggedIn] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
@@ -101,9 +101,9 @@ const Header = () => {
           ></i>
         )} */}
 
-        {/* <Button size="md" mode="dark">
+        <Button size="md" mode="dark">
           <Link to="/login">Signin</Link>
-        </Button> */}
+        </Button>
       </div>
     </div>
   );
